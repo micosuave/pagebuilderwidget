@@ -7,7 +7,7 @@ angular.module('adf.widget.pagebuilder', ['adf.provider'])
                 title: 'Page Builder',
                 description: 'construct a multipage weblog from your collection data',
                 templateUrl: '{widgetsPath}/pagebuilder/src/view.html',
-                frameless: false,
+                frameless: true,
                 controller: 'PageBuilderCtrl',
                 reload: true,
                 titleTemplateUrl: '{widgetsPath}/getphd/src/titleTemplate.html',
