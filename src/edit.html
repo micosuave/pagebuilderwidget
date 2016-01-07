@@ -1,12 +1,12 @@
 <form role="form">
     <div class="form-group">
         <label for="templateurl">TemplateUrl</label>
-        <input type="text" class="form-control" id="templateurl" ng-model="config.url" placeholder="Enter URL" ng-change="loadTemplate(config)" ng-model-options="{ updateOn: 'default blur', debounce: {'default': 1000, 'blur': 0} }">
-        <select ng-model="config.url" ng-change="loadTemplate(config)" ng-options="option.url as option.label for option in compOps">
+        <input type="text" class="form-control" id="templateurl" ng-model="page.config.url" placeholder="Enter URL" ng-change="loadTemplate(page.config)" ng-model-options="{ updateOn: 'default blur', debounce: {'default': 1000, 'blur': 0} }">
+        <select ng-model="page.config.url" ng-change="loadTemplate(config)" ng-options="option.url as option.label for option in page.compsources">
             <option value="" label=""></option>
         </select>
     </div>
 </form>
 
-<p ng-bind-html="config.data"></p>
-<pre class="code"><code>{{config.data}}</code></pre>
+<p ng-bind-html="page.config.data"></p>
+<pre class="code"><code>{{page.config.data}}</code></pre>
