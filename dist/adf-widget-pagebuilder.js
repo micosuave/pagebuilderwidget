@@ -10,12 +10,13 @@ angular.module('adf.widget.pagebuilder', ['adf.provider'])
                 templateUrl: '{widgetsPath}/pagebuilder/src/view.html',
                 frameless: true,
                 controller: 'PageBuilderCtrl',
+                controllerAs: 'page',
                 reload: true,
                 titleTemplateUrl: '{widgetsPath}/getphd/src/titleTemplate.html',
                 edit: {
                     templateUrl: '{widgetsPath}/pagebuilder/src/edit.html',
                     controller: 'PageBuilderConfigCtrl',
-                    controllerAs: 'config',
+                    controllerAs: 'page',
                     modalSize: 'lg',
                     reload: true,
                     immediate: true
