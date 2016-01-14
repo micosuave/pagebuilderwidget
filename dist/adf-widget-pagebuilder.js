@@ -84,8 +84,8 @@ angular.module('adf.widget.pagebuilder').controller('PageBuilderConfigCtrl', ['$
             }]
         }
     ])
-    .controller('PageBuilderCtrl', ['$scope', 'config', '$window', '$document', '$compile', '$parse', '$http', 'dashboard', '$sce',
-        function($scope, config, $window, $document, $compile, $parse, $http, dashboard, $sce) {
+    .controller('PageBuilderCtrl', ['$scope', 'config', '$window', '$document', '$compile', '$parse', '$http', 'dashboard', '$sce','Collection',
+        function($scope, config, $window, $document, $compile, $parse, $http, dashboard, $sce, Collection) {
           var page = this;
           $scope.collection = Collection(config.id);
           page.config = config;
@@ -100,4 +100,4 @@ angular.module('adf.widget.pagebuilder').controller('PageBuilderConfigCtrl', ['$
     ]);
 
 angular.module("adf.widget.pagebuilder").run(["$templateCache", function($templateCache) {$templateCache.put("{widgetsPath}/pagebuilder/src/edit.html","<form role=form><div class=form-group><label for=templateurl>TemplateUrl</label> <input type=text class=form-control id=templateurl ng-model=page.config.url placeholder=\"Enter URL\" ng-change=loadTemplate(page.config) ng-model-options=\"{ updateOn: \'default blur\', debounce: {\'default\': 1000, \'blur\': 0} }\"><select ng-model=page.config.url ng-change=loadTemplate(config) ng-options=\"option.url as option.label for option in page.compsources\"><option label></option></select></div></form><p ng-bind-html=page.config.data></p><pre class=code><code>{{page.config.data}}</code></pre>");
-$templateCache.put("{widgetsPath}/pagebuilder/src/view.html","<div ng-include=page.url></div><div ng-bind-html=page.template></div>");}]);})(window);
+$templateCache.put("{widgetsPath}/pagebuilder/src/view.html","<div ng-include=config.url></div><div ng-bind-html=page.template></div>");}]);})(window);

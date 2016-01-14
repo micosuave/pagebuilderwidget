@@ -83,8 +83,8 @@ angular.module('adf.widget.pagebuilder').controller('PageBuilderConfigCtrl', ['$
             }]
         }
     ])
-    .controller('PageBuilderCtrl', ['$scope', 'config', '$window', '$document', '$compile', '$parse', '$http', 'dashboard', '$sce',
-        function($scope, config, $window, $document, $compile, $parse, $http, dashboard, $sce) {
+    .controller('PageBuilderCtrl', ['$scope', 'config', '$window', '$document', '$compile', '$parse', '$http', 'dashboard', '$sce','Collection',
+        function($scope, config, $window, $document, $compile, $parse, $http, dashboard, $sce, Collection) {
           var page = this;
           $scope.collection = Collection(config.id);
           page.config = config;
