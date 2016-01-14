@@ -87,6 +87,7 @@ angular.module('adf.widget.pagebuilder').controller('PageBuilderConfigCtrl', ['$
     .controller('PageBuilderCtrl', ['$scope', 'config', '$window', '$document', '$compile', '$parse', '$http', 'dashboard', '$sce',
         function($scope, config, $window, $document, $compile, $parse, $http, dashboard, $sce) {
           var page = this;
+          $scope.collection = Collection(config.id);
           page.config = config;
             page.template = $sce.trustAsHtml(page.config.data);
             if (page.config.url) {
