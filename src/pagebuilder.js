@@ -28,7 +28,7 @@ angular.module('adf.widget.pagebuilder').controller('PageBuilderConfigCtrl', ['$
           var page = this;
           page.config = config;
             page.loadTemplate = function(config) {
-                var req = $templateCache.get(config.url).then(function(resp) {
+                $http.get(config.url).then(function(resp) {
                     page.data = resp.data;
                 });
             };
