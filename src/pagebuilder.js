@@ -3,6 +3,13 @@
 angular.module('adf.widget.pagebuilder', ['adf.provider'])
     .config(function(dashboardProvider) {
         dashboardProvider
+            .widget('placeholder',{
+                title: '',
+                description: '',
+                template: '<div class="hide"/>',
+                frameless:true,
+                styleClass: 'hide'   
+            })
             .widget('pagebuilder', {
                 title: 'Page Builder',
                 description: 'construct a multipage weblog from your collection data',
