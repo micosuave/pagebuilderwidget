@@ -1,0 +1,24 @@
+<div class="videogular-container " style="padding: 15px;margin:10px;display:flex;position:absolute;top:10px;right:-10px;bottom:20px;left:10px;">
+          <videogular vg-theme="'/lexlab-starter/node_modules/videogular-themes-default/videogular.css'" vg-complete="" vg-auto-play="{{config.autoplay}}" vg-start-time="{{config.starttime}}">
+            <vg-media vg-src="config.videosrc" vg-tracks="config.audiosrc">
+            <vg-controls>
+              <vg-play-pause-button></vg-play-pause-button>
+              <vg-time-display ng-bind-template="{{ currentTime | date:'mm:ss' }}"></vg-time-display>
+              <vg-scrub-bar>
+                <vg-scrub-bar-buffer></vg-scrub-bar-buffer>
+                <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+              </vg-scrub-bar>
+              <vg-time-display ng-bind-template="{{ timeLeft | date:'mm:ss' }}"></vg-time-display>
+              <vg-volume>
+                <vg-mute-button></vg-mute-button>
+                <vg-volume-bar></vg-volume-bar>
+              </vg-volume>
+              <vg-fullscreen-button></vg-fullscreen-button>
+            </vg-controls>
+            </vg-media>
+            <vg-overlay-play></vg-overlay-play>
+            <vg-poster vg-url="config.poster"></vg-poster>
+          </videogular>
+</div>
+            
+  

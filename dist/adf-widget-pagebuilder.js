@@ -1,7 +1,12 @@
 (function(window, undefined) {'use strict';
 
 
-angular.module('adf.widget.pagebuilder', ['adf.provider'])
+angular.module('adf.widget.pagebuilder', ['adf.provider','ngSanitize',
+            'com.2fdevs.videogular',
+            'com.2fdevs.videogular.plugins.controls',
+            'com.2fdevs.videogular.plugins.overlayplay',
+            'com.2fdevs.videogular.plugins.poster'
+           ])
     .config(["dashboardProvider", function(dashboardProvider) {
         dashboardProvider
             .widget('placeholder',{
@@ -17,6 +22,22 @@ angular.module('adf.widget.pagebuilder', ['adf.provider'])
                 controller: 'FeedCtrl',
                 frameless:false,
                 styleClass: 'panel-default'   
+            })
+            .widget('videoplayer',{
+                title: 'LexScreen',
+                description: 'videoplayer',
+                templateUrl: '{widgetsPath}/pagebuilder/src/videoplayer.html',
+                controller: 'VideoCtrl',
+                controllerAs: 'video',
+                frameless: false,
+                styleClass: 'panel-default',
+                edit:{
+                    controller: 'VideoCtrl',
+                    controllerAs: 'video',
+                    reload: true,
+                    immediate: true,
+                    templateUrl: '{widgetsPath}/pagebuilder/src/videoedit.html'
+                }
             })
             .widget('pagebuilder', {
                 title: 'Page Builder',
@@ -128,8 +149,44 @@ angular.module('adf.widget.pagebuilder').controller('PageBuilderConfigCtrl', ['$
         });
     };
     $scope.loadButonText=null;
-}]);
-
+}]).controller('VideoCtrl',
+        ["$sce","$scope","$window", function ($sce,$scope,$window) {
+            this.config = {
+                sources: [
+                    //{src: $sce.trustAsResourceUrl("https://cdn.filepicker.io/api/file/bbQUjDxLTUumApIUStAg"), type: "video/webm"}
+                     {src: $sce.trustAsResourceUrl("https://lexlab.io/files/public/charm.webm"), type: "video/webm"}
+                    //{src: $sce.trustAsResourceUrl("https://lexlab.io/files/public/lexspacevideo1.mov"), type: "video/mp4"}
+                    //{src: $sce.trustAsResourceUrl("http://static.videogular.com/assets/videos/videogular.webm"), type: "video/webm"},
+                    //{src: $sce.trustAsResourceUrl("http://static.videogular.com/assets/videos/videogular.ogg"), type: "video/ogg"}
+                ],
+                tracks: [
+                    // {
+                    //     src: "http://www.videogular.com/assets/subs/pale-blue-dot.vtt",
+                    //     kind: "subtitles",
+                    //     srclang: "en",
+                    //     label: "English",
+                    //     default: ""
+                    // }
+                ],
+                theme: "/lexlab-starter/node_modules/videogular-themes-default/videogular.css",
+                plugins: {
+                    poster: "https://lexlab.io/llp_core/img/lexlab.svg"
+                }
+            };
+            var home = this;
+            home.currentStep = 0;  
+            home.govid = function(){
+                var d = new Date;
+                var randomstring = d.getTime();
+                $window.open('/private/welcome/?='+randomstring, '_self');  
+            };
+            home.gohome = function(){
+                $window.open('/', '_self');  
+            };
+        }]
+    );
 angular.module("adf.widget.pagebuilder").run(["$templateCache", function($templateCache) {$templateCache.put("{widgetsPath}/pagebuilder/src/edit.html","<form role=form><div class=form-group><label for=templateurl>TemplateUrl</label> <input type=text class=form-control id=templateurl ng-model=page.config.url placeholder=\"Enter URL\" ng-change=loadTemplate(page.config) ng-model-options=\"{ updateOn: \'default blur\', debounce: {\'default\': 1000, \'blur\': 0} }\"><select ng-model=page.config.url ng-change=loadTemplate(config) ng-options=\"option.url as option.label for option in page.compsources\"><option label></option></select></div></form><p ng-bind-html=page.config.data></p><pre class=code><code>{{page.config.data}}</code></pre>");
 $templateCache.put("{widgetsPath}/pagebuilder/src/rssfeeds.html","<div id=rssfeedspanel class=\"panel panel-info sub-independent\" style=\"overflow: hidden;max-height: 50.5rem;\"><div class=panel-heading style=\"max-height: 5rem;\"><h4 class=splash style=margin-top:0rem;>News</h4></div><div class=panel-body style=\"width: 100%; height: 45.5rem; overflow: scroll;\"><div class=container><div class=row><form><div class=row><div class=input-prepend><div class=\"btn-group col-xs-6 pull-right\"><button class=\"btn btn-info dropdown-toggle pull-right btn-sm\" data-toggle=dropdown tabindex=-1 ng-init=\"loadFeed(feedSrc=\'http://ptolitigationcenter.com/feed/\');\" style=\"border-top-right-radius: 1rem;border-bottom-right-radius:1rem;font-size: 0.6rem;\"><span class=caret>&nbsp</span></button> <button class=\"btn btn-info pull-right btn-sm\" type=button tabindex=-1 ng-init=\"loadFeed(feedSrc=\'http://ptolitigationcenter.com/feed/\');\" style=\"font-size: 0.6rem;border-bottom-left-radius: 1rem;border-top-left-radius: 1rem;\" ng-show=\"loadButtonText = !null\">{{loadButonText}} &nbsp</button><ul class=dropdown-menu><li><a ng-click=\"feedSrc=\'http://patentlyo.com/feed\';loadFeed($event);\" style=\"font-size: 0.8rem;\">Patently-O</a></li><li><a ng-click=\"feedSrc=\'http://ptolitigationcenter.com/feed/\';loadFeed($event);\" style=\"font-size: 0.8rem;\">PTO Litigation Center</a></li><li><a ng-click=\"feedSrc=\'http://www.law360.com/ip/rss\';loadFeed($event)\" style=\"font-size: 0.8rem;\">IP Law360</a></li><li><a ng-click=\"feedSrc=\'http://feeds.feedblitz.com/AMLaw\';loadFeed($event)\" style=\"font-size: 0.8rem;\">AMLaw Daily</a></li><li><a ng-click=\"feedSrc=\'http://feeds.feedblitz.com/TAL\';loadFeed($event)\" style=\"font-size: 0.8rem;\">AM Law</a></li></ul></div><input type=text class=\"col-xs-6 pull-right\" autocomplete=off placeholder=\"Enter Feed URL\" data-ng-model=feedSrc></div></div><div class=\"row input-prepend\" ng-show=\"feeds.length > 0\"><input class=pull-left type=text placeholder=Search data-ng-model=filterText> <span class=\"label label-warning pull-right\" ng-show=\"feeds.length > 0\" style=\"border-radius: 0.5rem;margin-top: 0.5rem;\">{{(feeds | filter:filterText).length}} Items</span></div></form></div><div class=row-fluid><ul class=list-group style=\"text-align: left;\"><li ng-repeat=\"feed in feeds | filter:filterText\" class=list-group-item><h6><a href={{feed.link}} onclick=\"window.open(this.href, \'\', \'resizable=yes,status=no,location=no,toolbar=no,menubar=no,fullscreen=no,scrollbars=yes,dependent=no,width=800,left=150,height=500,top=150\'); return false;\">{{feed.title}}</a></h6><p class=text-left style=\"line-height: 1;\">{{feed.contentSnippet}} <small class=\"pull-right small\">{{feed.publishedDate | date}}</small></p></li></ul></div></div></div></div>");
+$templateCache.put("{widgetsPath}/pagebuilder/src/videoedit.html","<form role=form><div class=form-group><label for=videosource>Video Source(s)</label> <input type=text class=form-control id=videosource ng-model=config.videosrc[0] placeholder=\"Enter URL\" ng-model-options=\"{ updateOn: \'default blur\', debounce: {\'default\': 1000, \'blur\': 0} }\"> <button class=\"btn btn-primary fa fa-plus\" ng-click=\"config.videosrc.unshift(\'about:blank\')\"></button> <small ng-repeat=\"source in config.videosrc\">{{source}}<a class=\"fa fa-remove text-danger\" ng-click=config.videosrc.slice(config.videosrc.indexOf(source),1)></a></small></div><div class=form-group><div class=col-sm-6><label for=autoplay>AutoPlay?</label> <input type=checkbox class=form-control id=autoplay ng-model=config.autoplay></div><div class=col-sm-6><label for=starttime>StartTime</label> <input type=time class=form-control id=starttime ng-model=config.starttime></div></div><div class=form-group><label for=audiosource>Audio Track(s)</label> <input type=text class=form-control id=audiosource ng-model=config.audiosrc[0] placeholder=\"Enter URL\" ng-model-options=\"{ updateOn: \'default blur\', debounce: {\'default\': 1000, \'blur\': 0} }\"> <button class=\"btn btn-primary fa fa-plus\" ng-click=\"config.audiosrc.unshift(\'about:blank\')\"></button> <small ng-repeat=\"source in config.audiosrc\">{{source}}<a class=\"fa fa-remove text-danger\" ng-click=config.audiosrc.slice(config.audiosrc.indexOf(source),1)></a></small></div><div class=form-group><div class=col-sm-8><label for=poster>Poster/CoverArt</label> <input type=text class=form-control id=poster ng-model=config.poster placeholder=\"Enter URL\" ng-model-options=\"{ updateOn: \'default blur\', debounce: {\'default\': 1000, \'blur\': 0} }\"></div><div class=col-sm-4><img ng-src=\"{{config.poster || \'https://placehold.it/250x200/222222/ffa/&text=G%20%26%20S\'}}\" class=\"img img-thumbnail img-responsive\"></div></div></form>");
+$templateCache.put("{widgetsPath}/pagebuilder/src/videoplayer.html","<div class=videogular-container style=\"padding: 15px;margin:10px;display:flex;position:absolute;top:10px;right:-10px;bottom:20px;left:10px;\"><videogular vg-theme=\"\'/lexlab-starter/node_modules/videogular-themes-default/videogular.css\'\" vg-complete vg-auto-play={{config.autoplay}} vg-start-time={{config.starttime}}><vg-media vg-src=config.videosrc vg-tracks=config.audiosrc><vg-controls><vg-play-pause-button></vg-play-pause-button><vg-time-display ng-bind-template=\"{{ currentTime | date:\'mm:ss\' }}\"></vg-time-display><vg-scrub-bar><vg-scrub-bar-buffer></vg-scrub-bar-buffer><vg-scrub-bar-current-time></vg-scrub-bar-current-time></vg-scrub-bar><vg-time-display ng-bind-template=\"{{ timeLeft | date:\'mm:ss\' }}\"></vg-time-display><vg-volume><vg-mute-button></vg-mute-button><vg-volume-bar></vg-volume-bar></vg-volume><vg-fullscreen-button></vg-fullscreen-button></vg-controls></vg-media><vg-overlay-play></vg-overlay-play><vg-poster vg-url=config.poster></vg-poster></videogular></div>");
 $templateCache.put("{widgetsPath}/pagebuilder/src/view.html","<div ng-include=config.url></div><div ng-bind-html=page.template></div>");}]);})(window);

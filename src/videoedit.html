@@ -1,0 +1,34 @@
+<form role="form">
+    <div class="form-group">
+        <label for="videosource">Video Source(s)</label>
+        <input type="text" class="form-control" id="videosource" ng-model="config.videosrc[0]" placeholder="Enter URL" ng-model-options="{ updateOn: 'default blur', debounce: {'default': 1000, 'blur': 0} }">
+        <button class="btn btn-primary fa fa-plus" ng-click="config.videosrc.unshift('about:blank')"></button>
+        <small ng-repeat="source in config.videosrc">{{source}}<a class="fa fa-remove text-danger" ng-click="config.videosrc.slice(config.videosrc.indexOf(source),1)"></a></small>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-6">
+        <label for="autoplay">AutoPlay?</label>
+        <input type="checkbox" class="form-control" id="autoplay" ng-model="config.autoplay" >
+        </div>
+        <div class="col-sm-6">
+        <label for="starttime">StartTime</label>
+        <input type="time" class="form-control" id="starttime" ng-model="config.starttime" >
+        </div>
+        
+    </div>
+    <div class="form-group">
+        <label for="audiosource">Audio Track(s) </label>
+        <input type="text" class="form-control" id="audiosource" ng-model="config.audiosrc[0]" placeholder="Enter URL" ng-model-options="{ updateOn: 'default blur', debounce: {'default': 1000, 'blur': 0} }">
+         <button class="btn btn-primary fa fa-plus" ng-click="config.audiosrc.unshift('about:blank')"></button>
+        <small ng-repeat="source in config.audiosrc">{{source}}<a class="fa fa-remove text-danger" ng-click="config.audiosrc.slice(config.audiosrc.indexOf(source),1)"></a></small>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-8">
+        <label for="poster">Poster/CoverArt</label>
+        <input type="text" class="form-control" id="poster" ng-model="config.poster" placeholder="Enter URL" ng-model-options="{ updateOn: 'default blur', debounce: {'default': 1000, 'blur': 0} }">
+        </div>
+        <div class="col-sm-4">
+            <img ng-src="{{config.poster || 'https://placehold.it/250x200/222222/ffa/&text=G%20%26%20S'}}" class="img img-thumbnail img-responsive "/>
+        </div> 
+    </div>
+</form>

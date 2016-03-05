@@ -1,6 +1,11 @@
 'use strict';
 
-angular.module('adf.widget.pagebuilder', ['adf.provider'])
+angular.module('adf.widget.pagebuilder', ['adf.provider','ngSanitize',
+            'com.2fdevs.videogular',
+            'com.2fdevs.videogular.plugins.controls',
+            'com.2fdevs.videogular.plugins.overlayplay',
+            'com.2fdevs.videogular.plugins.poster'
+           ])
     .config(function(dashboardProvider) {
         dashboardProvider
             .widget('placeholder',{
@@ -16,6 +21,22 @@ angular.module('adf.widget.pagebuilder', ['adf.provider'])
                 controller: 'FeedCtrl',
                 frameless:false,
                 styleClass: 'panel-default'   
+            })
+            .widget('videoplayer',{
+                title: 'LexScreen',
+                description: 'videoplayer',
+                templateUrl: '{widgetsPath}/pagebuilder/src/videoplayer.html',
+                controller: 'VideoCtrl',
+                controllerAs: 'video',
+                frameless: false,
+                styleClass: 'panel-default',
+                edit:{
+                    controller: 'VideoCtrl',
+                    controllerAs: 'video',
+                    reload: true,
+                    immediate: true,
+                    templateUrl: '{widgetsPath}/pagebuilder/src/videoedit.html'
+                }
             })
             .widget('pagebuilder', {
                 title: 'Page Builder',
@@ -127,4 +148,39 @@ angular.module('adf.widget.pagebuilder').controller('PageBuilderConfigCtrl', ['$
         });
     };
     $scope.loadButonText=null;
-}]);
+}]).controller('VideoCtrl',
+        ["$sce","$scope","$window", function ($sce,$scope,$window) {
+            this.config = {
+                sources: [
+                    //{src: $sce.trustAsResourceUrl("https://cdn.filepicker.io/api/file/bbQUjDxLTUumApIUStAg"), type: "video/webm"}
+                     {src: $sce.trustAsResourceUrl("https://lexlab.io/files/public/charm.webm"), type: "video/webm"}
+                    //{src: $sce.trustAsResourceUrl("https://lexlab.io/files/public/lexspacevideo1.mov"), type: "video/mp4"}
+                    //{src: $sce.trustAsResourceUrl("http://static.videogular.com/assets/videos/videogular.webm"), type: "video/webm"},
+                    //{src: $sce.trustAsResourceUrl("http://static.videogular.com/assets/videos/videogular.ogg"), type: "video/ogg"}
+                ],
+                tracks: [
+                    // {
+                    //     src: "http://www.videogular.com/assets/subs/pale-blue-dot.vtt",
+                    //     kind: "subtitles",
+                    //     srclang: "en",
+                    //     label: "English",
+                    //     default: ""
+                    // }
+                ],
+                theme: "/lexlab-starter/node_modules/videogular-themes-default/videogular.css",
+                plugins: {
+                    poster: "https://lexlab.io/llp_core/img/lexlab.svg"
+                }
+            };
+            var home = this;
+            home.currentStep = 0;  
+            home.govid = function(){
+                var d = new Date;
+                var randomstring = d.getTime();
+                $window.open('/private/welcome/?='+randomstring, '_self');  
+            };
+            home.gohome = function(){
+                $window.open('/', '_self');  
+            };
+        }]
+    );
