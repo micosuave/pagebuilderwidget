@@ -134,17 +134,17 @@ angular.module('adf.widget.pagebuilder').controller('PageBuilderConfigCtrl', ['$
                 page.data = $sce.trustAsHtml(page.config.data);
             }
         }
-    ]).factory('FeedService',['$http',function($http){
+    ]).factory('FeedyService',['$http',function($http){
     return {
         parseFeed : function(url){
             return $http.jsonp('//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=50&callback=JSON_CALLBACK&q=' + encodeURIComponent(url));
         }
     };
 }])
-.controller("FeedCtrl", ['$scope','FeedService','config', function ($scope,FeedService,config) {
+.controller("FeedCtrl", ['$scope','FeedyService','config', function ($scope,FeedyService,config) {
     var config = config;
     $scope.loadFeed=function(e){
-        FeedService.parseFeed($scope.feedSrc).then(function(res){
+        FeedyService.parseFeed($scope.feedSrc).then(function(res){
             $scope.loadButonText=angular.element(e.target).text();
             $scope.feeds=res.data.responseData.feed.entries;
             config.src = $scope.feedSrc;
@@ -156,6 +156,10 @@ angular.module('adf.widget.pagebuilder').controller('PageBuilderConfigCtrl', ['$
         ["$sce","$scope","$window","config", function ($sce,$scope,$window,config) {
             var video = this;
             $scope.config = config;
+            video,config = {
+                sources: [],
+                tracks: []
+            };
             angular.forEach(config.videosrc, function(source, key){
                 video.config.sources.push($sce.trustAsResourceUrl(source));
             });
@@ -163,28 +167,28 @@ angular.module('adf.widget.pagebuilder').controller('PageBuilderConfigCtrl', ['$
                 video.config.tracks.push($sce.trustAsResourceUrl(source));
             });
             
-            video.config = {
-                sources: [
-                    //{src: $sce.trustAsResourceUrl("https://cdn.filepicker.io/api/file/bbQUjDxLTUumApIUStAg"), type: "video/webm"}
-                     {src: $sce.trustAsResourceUrl("https://lexlab.io/files/public/charm.webm"), type: "video/webm"}
-                    //{src: $sce.trustAsResourceUrl("https://lexlab.io/files/public/lexspacevideo1.mov"), type: "video/mp4"}
-                    //{src: $sce.trustAsResourceUrl("http://static.videogular.com/assets/videos/videogular.webm"), type: "video/webm"},
-                    //{src: $sce.trustAsResourceUrl("http://static.videogular.com/assets/videos/videogular.ogg"), type: "video/ogg"}
-                ],
-                tracks: [
-                    // {
-                    //     src: "http://www.videogular.com/assets/subs/pale-blue-dot.vtt",
-                    //     kind: "subtitles",
-                    //     srclang: "en",
-                    //     label: "English",
-                    //     default: ""
-                    // }
-                ],
-                theme: "/lexlab-starter/node_modules/videogular-themes-default/videogular.css",
-                plugins: {
-                    poster: "https://lexlab.io/llp_core/img/lexlab.svg"
-                }
-            };
+            // video.config = {
+            //     sources: [
+            //         //{src: $sce.trustAsResourceUrl("https://cdn.filepicker.io/api/file/bbQUjDxLTUumApIUStAg"), type: "video/webm"}
+            //          {src: $sce.trustAsResourceUrl("https://lexlab.io/files/public/charm.webm"), type: "video/webm"}
+            //         //{src: $sce.trustAsResourceUrl("https://lexlab.io/files/public/lexspacevideo1.mov"), type: "video/mp4"}
+            //         //{src: $sce.trustAsResourceUrl("http://static.videogular.com/assets/videos/videogular.webm"), type: "video/webm"},
+            //         //{src: $sce.trustAsResourceUrl("http://static.videogular.com/assets/videos/videogular.ogg"), type: "video/ogg"}
+            //     ],
+            //     tracks: [
+            //         // {
+            //         //     src: "http://www.videogular.com/assets/subs/pale-blue-dot.vtt",
+            //         //     kind: "subtitles",
+            //         //     srclang: "en",
+            //         //     label: "English",
+            //         //     default: ""
+            //         // }
+            //     ],
+            //     theme: "/lexlab-starter/node_modules/videogular-themes-default/videogular.css",
+            //     plugins: {
+            //         poster: "https://lexlab.io/llp_core/img/lexlab.svg"
+            //     }
+            //};
             
         }]
     );
