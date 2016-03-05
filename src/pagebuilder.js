@@ -66,9 +66,13 @@ angular.module('adf.widget.pagebuilder').controller('PageBuilderConfigCtrl', ['$
           var page = this;
           page.config = config;
             page.loadTemplate = function(config) {
+                if (!config.template){
                 $http.get(config.url).then(function(resp) {
-                    page.data = resp.data;
+                    page.data = $sce.trustAsHtml(resp.data);
                 });
+                }else{
+                    page.data = $sce.trustAsHtml(config.template);
+                }
             };
             if (page.config.url) {
                 page.url = $sce.trustAsResourceUrl(page.config.url);
