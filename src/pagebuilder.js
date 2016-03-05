@@ -48,7 +48,7 @@ angular.module('adf.widget.pagebuilder', ['adf.provider','ngSanitize',
                 controller: 'PageBuilderCtrl',
                 controllerAs: 'page',
 		styleClass: 'panel-default',
-                //reload: true,
+                reload: true,
                 //titleTemplateUrl: '{widgetsPath}/getphd/src/titleTemplate.html',
                 edit: {
                     templateUrl: '{widgetsPath}/pagebuilder/src/edit.html',
@@ -145,7 +145,7 @@ angular.module('adf.widget.pagebuilder').controller('PageBuilderConfigCtrl', ['$
         }
     };
 }])
-.controller("FeedCtrl", ['$scope','FeedyService','config', function ($scope,FeedyService,config) {
+.controller('FeedCtrl', ['$scope','FeedyService','config', function ($scope,FeedyService,config) {
     var config = config;
     $scope.loadFeed=function(e){
         FeedyService.parseFeed($scope.feedSrc).then(function(res){
@@ -160,7 +160,7 @@ angular.module('adf.widget.pagebuilder').controller('PageBuilderConfigCtrl', ['$
         ["$sce","$scope","$window","config", function ($sce,$scope,$window,config) {
             var video = this;
             $scope.config = config;
-            video,config = {
+            video.config = {
                 sources: [],
                 tracks: []
             };
