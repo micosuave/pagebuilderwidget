@@ -9,6 +9,13 @@ angular.module('adf.widget.pagebuilder', ['adf.provider'])
                 template: '<div class="hide"/>',
                 frameless:true,
                 styleClass: 'hide'   
+            }).widget('lexfeed',{
+                title: 'LexFeed',
+                description: 'RSS Feed Reader',
+                template: '{widgetsPath}/pagebuilder/src/rssfeeds.html',
+                controller: 'FeedCtrl',
+                frameless:false,
+                styleClass: 'panel-default'   
             })
             .widget('pagebuilder', {
                 title: 'Page Builder',
@@ -104,4 +111,20 @@ angular.module('adf.widget.pagebuilder').controller('PageBuilderConfigCtrl', ['$
                 page.data = $sce.trustAsHtml(page.config.data);
             }
         }
-    ]);
+    ]).factory('FeedService',['$http',function($http){
+    return {
+        parseFeed : function(url){
+            return $http.jsonp('//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=50&callback=JSON_CALLBACK&q=' + encodeURIComponent(url));
+        }
+    };
+}])
+.controller("FeedCtrl", ['$scope','FeedService', function ($scope,FeedService) {
+    
+    $scope.loadFeed=function(e){
+        FeedService.parseFeed($scope.feedSrc).then(function(res){
+            $scope.loadButonText=angular.element(e.target).text();
+            $scope.feeds=res.data.responseData.feed.entries;
+        });
+    };
+    $scope.loadButonText=null;
+}]);
