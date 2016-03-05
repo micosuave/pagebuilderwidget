@@ -18,10 +18,11 @@ angular.module('adf.widget.pagebuilder', ['adf.provider','ngSanitize',
             }).widget('lexfeed',{
                 title: 'LexFeed',
                 description: 'RSS Feed Reader',
-                template: '{widgetsPath}/pagebuilder/src/rssfeeds.html',
+                templateUrl: '{widgetsPath}/pagebuilder/src/rssfeeds.html',
                 controller: 'FeedCtrl',
                 frameless:false,
-                styleClass: 'panel-default'   
+                reload: true,
+                styleClass: 'panel-info'   
             })
             .widget('videoplayer',{
                 title: 'LexScreen',
@@ -30,6 +31,7 @@ angular.module('adf.widget.pagebuilder', ['adf.provider','ngSanitize',
                 controller: 'VideoCtrl',
                 controllerAs: 'video',
                 frameless: false,
+                reload: true,
                 styleClass: 'panel-default',
                 edit:{
                     controller: 'VideoCtrl',
