@@ -8,7 +8,9 @@
     "adf-widget"
   ],
   "description": "construct a multipage weblog from your collection data",
-  "dependencies": {},
+  "dependencies": {
+    "gulp": "^3.9.1"
+  },
   "devDependencies": {
     "gulp": "^3.8.11",
     "gulp-angular-filesort": "^1.1.1",

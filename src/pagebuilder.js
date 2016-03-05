@@ -149,8 +149,10 @@ angular.module('adf.widget.pagebuilder').controller('PageBuilderConfigCtrl', ['$
     };
     $scope.loadButonText=null;
 }]).controller('VideoCtrl',
-        ["$sce","$scope","$window", function ($sce,$scope,$window) {
-            this.config = {
+        ["$sce","$scope","$window","config", function ($sce,$scope,$window,config) {
+            var video = this;
+            $scope.config = config;
+            video.config = {
                 sources: [
                     //{src: $sce.trustAsResourceUrl("https://cdn.filepicker.io/api/file/bbQUjDxLTUumApIUStAg"), type: "video/webm"}
                      {src: $sce.trustAsResourceUrl("https://lexlab.io/files/public/charm.webm"), type: "video/webm"}
