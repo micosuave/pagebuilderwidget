@@ -174,15 +174,6 @@ angular.module('adf.widget.pagebuilder').controller('PageBuilderConfigCtrl', ['$
                     poster: "https://lexlab.io/llp_core/img/lexlab.svg"
                 }
             };
-            var home = this;
-            home.currentStep = 0;  
-            home.govid = function(){
-                var d = new Date;
-                var randomstring = d.getTime();
-                $window.open('/private/welcome/?='+randomstring, '_self');  
-            };
-            home.gohome = function(){
-                $window.open('/', '_self');  
-            };
+            
         }]
     );

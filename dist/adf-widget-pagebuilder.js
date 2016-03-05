@@ -175,16 +175,7 @@ angular.module('adf.widget.pagebuilder').controller('PageBuilderConfigCtrl', ['$
                     poster: "https://lexlab.io/llp_core/img/lexlab.svg"
                 }
             };
-            var home = this;
-            home.currentStep = 0;  
-            home.govid = function(){
-                var d = new Date;
-                var randomstring = d.getTime();
-                $window.open('/private/welcome/?='+randomstring, '_self');  
-            };
-            home.gohome = function(){
-                $window.open('/', '_self');  
-            };
+            
         }]
     );
 angular.module("adf.widget.pagebuilder").run(["$templateCache", function($templateCache) {$templateCache.put("{widgetsPath}/pagebuilder/src/edit.html","<form role=form><div class=form-group><label for=templateurl>TemplateUrl</label> <input type=text class=form-control id=templateurl ng-model=page.config.url placeholder=\"Enter URL\" ng-change=loadTemplate(page.config) ng-model-options=\"{ updateOn: \'default blur\', debounce: {\'default\': 1000, \'blur\': 0} }\"><select ng-model=page.config.url ng-change=loadTemplate(config) ng-options=\"option.url as option.label for option in page.compsources\"><option label></option></select></div></form><p ng-bind-html=page.config.data></p><pre class=code><code>{{page.config.data}}</code></pre>");
