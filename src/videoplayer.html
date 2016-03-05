@@ -1,6 +1,6 @@
 <div class="videogular-container " style="padding: 15px;margin:10px;display:flex;position:absolute;top:10px;right:-10px;bottom:20px;left:10px;">
-          <videogular vg-theme="'/lexlab-starter/node_modules/videogular-themes-default/videogular.css'" vg-complete="" vg-auto-play="{{config.autoplay}}" vg-start-time="{{config.starttime}}">
-            <vg-media vg-src="config.videosrc" vg-tracks="config.audiosrc">
+          <videogular vg-theme="'/lexlab-starter/node_modules/videogular-themes-default/videogular.css'" vg-complete="" vg-auto-play="config.autoplay" vg-start-time="{{config.starttime}}">
+            <vg-media vg-src="video.config.sources" vg-tracks="video.config.tracks">
             <vg-controls>
               <vg-play-pause-button></vg-play-pause-button>
               <vg-time-display ng-bind-template="{{ currentTime | date:'mm:ss' }}"></vg-time-display>

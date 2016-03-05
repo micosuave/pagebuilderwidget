@@ -19,7 +19,7 @@ angular.module('adf.widget.pagebuilder', ['adf.provider','ngSanitize',
                 description: 'RSS Feed Reader',
                 templateUrl: '{widgetsPath}/pagebuilder/src/rssfeeds.html',
                 controller: 'FeedCtrl',
-                frameless:false,
+                frameless:true,
                 reload: true,
                 styleClass: 'panel-info'   
             })
@@ -31,7 +31,7 @@ angular.module('adf.widget.pagebuilder', ['adf.provider','ngSanitize',
                 controllerAs: 'video',
                 frameless: false,
                 reload: true,
-                styleClass: 'panel-default',
+                styleClass: 'dark-bg',
                 edit:{
                     controller: 'VideoCtrl',
                     controllerAs: 'video',
@@ -141,19 +141,28 @@ angular.module('adf.widget.pagebuilder').controller('PageBuilderConfigCtrl', ['$
         }
     };
 }])
-.controller("FeedCtrl", ['$scope','FeedService', function ($scope,FeedService) {
-    
+.controller("FeedCtrl", ['$scope','FeedService','config', function ($scope,FeedService,config) {
+    var config = config;
     $scope.loadFeed=function(e){
         FeedService.parseFeed($scope.feedSrc).then(function(res){
             $scope.loadButonText=angular.element(e.target).text();
             $scope.feeds=res.data.responseData.feed.entries;
+            config.src = $scope.feedSrc;
         });
     };
+    $scope.loadFeed(config.src);
     $scope.loadButonText=null;
 }]).controller('VideoCtrl',
         ["$sce","$scope","$window","config", function ($sce,$scope,$window,config) {
             var video = this;
             $scope.config = config;
+            angular.forEach(config.videosrc, function(source, key){
+                video.config.sources.push($sce.trustAsResourceUrl(source));
+            });
+            angular.forEach(config.audiosrc, function(source, key){
+                video.config.tracks.push($sce.trustAsResourceUrl(source));
+            });
+            
             video.config = {
                 sources: [
                     //{src: $sce.trustAsResourceUrl("https://cdn.filepicker.io/api/file/bbQUjDxLTUumApIUStAg"), type: "video/webm"}
