@@ -19,7 +19,7 @@ angular.module('adf.widget.pagebuilder', ['adf.provider','ngSanitize',
                 description: 'RSS Feed Reader',
                 templateUrl: '{widgetsPath}/pagebuilder/src/rssfeeds.html',
                 controller: 'FeedyCtrl',
-                frameless:true,
+                frameless:false,
                 reload: true,
                 styleClass: 'panel-info',
                 edit:{
