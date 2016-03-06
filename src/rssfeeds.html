@@ -1,29 +1,29 @@
-<div id="rssfeedspanel" class="panel panel-info sub-independent" style="overflow: hidden;max-height: 75.5rem;">
+<!--<div id="rssfeedspanel" class="panel panel-info sub-independent" style="overflow: hidden;max-height: 75.5rem;">
     <div class="panel-heading" style="max-height: 5rem;">
         <h4 class="" style="margin-top:0rem;">{{config.title || 'LexFeed'}}</h4></div>
     <div class="panel-body" style="width: 100%; height: 55.5rem; overflow: scroll;">
-        <div class="container" ng-controller="FeedyCtrl">
-            <div class="row">
+        <div class="container" ng-controller="FeedyCtrl">-->
+            <!--<div class="row">-->
                 <form class="card-header" style="">
                     <div class="row">
                         <div class="input-prepend">
                             <div class="btn-group col-xs-6 pull-right" uib-dropdown uib-keyboard-nav dropdown-append-to-body>
 
-                                <button uib-dropdown-toggle class="btn btn-info dropdown-toggle pull-right btn-sm"  tabindex="-1" style="border-top-right-radius: 1rem;border-bottom-right-radius:1rem;font-size: 0.6rem;">
+                                <button uib-dropdown-toggle class="btn btn-info dropdown-toggle pull-right btn-sm"  tabindex="-1" style="border-top-right-radius: 1rem;border-bottom-right-radius:1rem;font-size: 1rem;">
                                     <span class="caret">&nbsp</span>
                                 </button>
-                                <button class="btn btn-info pull-right btn-sm " type="button" tabindex="-1"  style="font-size: 0.6rem;border-bottom-left-radius: 1rem;border-top-left-radius: 1rem;" ng-show="loadButtonText = !null">{{loadButonText}} &nbsp</button>
+                                <button class="btn btn-info pull-right btn-sm " type="button" tabindex="-1"  style="font-size: 1rem;border-bottom-left-radius: 1rem;border-top-left-radius: 1rem;" ng-show="loadButtonText = !null">{{loadButonText}} &nbsp</button>
                                 <ul class="uib-dropdown-menu dropdown-menu">
-                                    <li><a ng-click="feedSrc='http://patentlyo.com/feed';loadFeed($event);" style="font-size: 0.8rem;">Patently-O</a></li>
-                                    <li><a ng-click="feedSrc='http://ptolitigationcenter.com/feed/';loadFeed($event);" style="font-size: 0.8rem;">PTO Litigation Center</a></li>
+                                    <li><a ng-click="feedSrc='http://patentlyo.com/feed';loadFeed($event);" style="font-size: 1rem;">Patently-O</a></li>
+                                    <li><a ng-click="feedSrc='http://ptolitigationcenter.com/feed/';loadFeed($event);" style="font-size: 1rem;">PTO Litigation Center</a></li>
 
-                                    <li><a ng-click="feedSrc='http://www.law360.com/ip/rss';loadFeed($event)" style="font-size: 0.8rem;">IP Law360</a></li>
-                                    <li><a ng-click="feedSrc='http://feeds.feedblitz.com/AMLaw';loadFeed($event)" style="font-size: 0.8rem;">AMLaw Daily</a></li>
-                                    <li><a ng-click="feedSrc='http://feeds.feedblitz.com/TAL';loadFeed($event)" style="font-size: 0.8rem;">AM Law</a></li>
+                                    <li><a ng-click="feedSrc='http://www.law360.com/ip/rss';loadFeed($event)" style="font-size: 1rem;">IP Law360</a></li>
+                                    <li><a ng-click="feedSrc='http://feeds.feedblitz.com/AMLaw';loadFeed($event)" style="font-size: 1rem;">AMLaw Daily</a></li>
+                                    <li><a ng-click="feedSrc='http://feeds.feedblitz.com/TAL';loadFeed($event)" style="font-size: 1rem;">AM Law</a></li>
                                 </ul>
                             </div>
 
-                            <input type="text" class="col-xs-6 pull-right" autocomplete="off" placeholder="Enter Feed URL" data-ng-model="feedSrc" />
+                            <input type="text" class="col-xs-6 pull-right" autocomplete="on" placeholder="Enter Feed URL" data-ng-model="feedSrc" />
                         </div>
                     </div>
                     <div class="row input-prepend" ng-show="feeds.length > 0">
@@ -35,19 +35,20 @@
 
 
                 </form>
-            </div>
-            <div class="card card-block" style="height:100%;overflow:scroll;">
+            <!--</div>-->
+            <div class="card" style="height:100%;overflow:scroll;">
+                <dir-pagination-controls pagination-id="rsspagination" template-url="/llp_core/bower_components/angular-utils-pagination/dirPagination.tpl.html" class=""></dir-pagination-controls>
                 <ul class="list-group" style="text-align: left;">
 
-                    <li ng-repeat="feed in feeds | filter:filterText" class="list-group-item" uib-popover uib-popover-html="{{feed.content}}" popover-trigger="mouseenter mouseover mousedown click" popover-animation="true" >
-                        <h6><a href="{{feed.link}}" onclick="window.open(this.href, '', 'resizable=yes,status=no,location=no,toolbar=no,menubar=no,fullscreen=no,scrollbars=yes,dependent=no,width=800,left=150,height=500,top=150'); return false;">{{feed.title}}</a></h6>
-                        <p class="text-left" style="line-height: 1;">{{feed.contentSnippet}}
+                    <li dir-paginate="feed in feeds | filter:filterText | itemsPerPage: 15" pagination-id="rsspagination" class="list-group-item" uib-popover-html="{{feed.content | trustAsHtml | highlight: filterText}}" popover-trigger="mouseenter" >
+                        <h6><a href="{{feed.link}}" onclick="window.open(this.href, '', 'resizable=yes,status=no,location=no,toolbar=no,menubar=no,fullscreen=no,scrollbars=yes,dependent=no,width=800,left=150,height=500,top=150'); return false;">{{feed.title | highlight: filterText}}</a></h6>
+                        <p class="text-left" style="line-height: 1;">{{feed.contentSnippet | highlight: filterText}}
                             <small class="pull-right small">{{feed.publishedDate | date}}</small>
                         </p>
                     </li>
                 </ul>
             </div>
-        </div>
+        <!--</div>
     </div>
 </div>
-</div>
+</div>-->
