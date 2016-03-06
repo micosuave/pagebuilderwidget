@@ -149,15 +149,15 @@ angular.module('adf.widget.pagebuilder').controller('PageBuilderConfigCtrl', ['$
     };
 }])
 .controller('FeedyCtrl', ['$scope','FeedyService','config', function ($scope,FeedyService,config) {
-    var config = config;
+    
     $scope.loadFeed=function(e){
         FeedyService.parseFeed($scope.feedSrc).then(function(res){
             $scope.loadButonText=angular.element(e.target).text();
             $scope.feeds=res.data.responseData.feed.entries;
-            config.src = $scope.feedSrc;
+            
         });
     };
-    $scope.loadFeed(config.src);
+   
     $scope.loadButonText=null;
 }]).controller('VideoCtrl',
         ["$sce","$scope","$window","config", function ($sce,$scope,$window,config) {
