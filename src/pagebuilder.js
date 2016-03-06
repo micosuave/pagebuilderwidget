@@ -18,10 +18,13 @@ angular.module('adf.widget.pagebuilder', ['adf.provider','ngSanitize',
                 title: 'LexFeed',
                 description: 'RSS Feed Reader',
                 templateUrl: '{widgetsPath}/pagebuilder/src/rssfeeds.html',
-                controller: 'FeedCtrl',
+                controller: 'FeedyCtrl',
                 frameless:true,
                 reload: true,
-                styleClass: 'panel-info'   
+                styleClass: 'panel-info',
+                edit:{
+                    template: '<input ng-model="config.src" placeholder="feed source" type="url" />'
+                }   
             })
             .widget('videoplayer',{
                 title: 'LexScreen',
@@ -29,7 +32,7 @@ angular.module('adf.widget.pagebuilder', ['adf.provider','ngSanitize',
                 templateUrl: '{widgetsPath}/pagebuilder/src/videoplayer.html',
                 controller: 'VideoCtrl',
                 controllerAs: 'video',
-                frameless: false,
+                frameless: true,
                 reload: true,
                 styleClass: 'dark-bg',
                 edit:{
@@ -44,7 +47,7 @@ angular.module('adf.widget.pagebuilder', ['adf.provider','ngSanitize',
                 title: 'Page Builder',
                 description: 'construct a multipage weblog from your collection data',
                 templateUrl: '{widgetsPath}/pagebuilder/src/view.html',
-                frameless: 'frameless',
+                frameless: false,
                 controller: 'PageBuilderCtrl',
                 controllerAs: 'page',
 		styleClass: 'panel-default',
@@ -145,7 +148,7 @@ angular.module('adf.widget.pagebuilder').controller('PageBuilderConfigCtrl', ['$
         }
     };
 }])
-.controller('FeedCtrl', ['$scope','FeedyService','config', function ($scope,FeedyService,config) {
+.controller('FeedyCtrl', ['$scope','FeedyService','config', function ($scope,FeedyService,config) {
     var config = config;
     $scope.loadFeed=function(e){
         FeedyService.parseFeed($scope.feedSrc).then(function(res){
