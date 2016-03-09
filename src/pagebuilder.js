@@ -222,11 +222,17 @@ angular.module('adf.widget.pagebuilder').controller('PageBuilderConfigCtrl', ['$
             var data = feed.content;
             var dates = [];
             angular.forEach(data, function(datum, key){
-                
-               var props = datum.split('<br/>');
-               var prop = props.split('-');
-               var da = new Object.create(null, [prop[1], prop[0]]);
+                var props = [];
+               var line = datum.split('<br/>');
+               props.push(line);
+               angular.forEach(props, function(prop, key){
+                   var prop = props.split('-');
+                   var key = prop[0];
+                   var value = prop[1];
+               var da = new Object.create(null, [key, value]);
                dates.push(da);
+               });
+               
             });
             $scope.dates = dates;
         };
