@@ -7,15 +7,15 @@
                 <form class="card-header" style="">
                     <div class="row">
                         <div class="input-prepend">
-                            <div class="btn-group col-xs-6" uib-dropdown uib-keyboard-nav dropdown-append-to-body>
+                            <div class="btn-group " uib-dropdown uib-keyboard-nav dropdown-append-to-body>
 
                                 <button uib-dropdown-toggle class="btn btn-info  btn-sm"  tabindex="-1" style="font-size: 1rem;">
                                     <span class="caret">&nbsp</span>
                                 </button>
-                                <button class="btn btn-info  btn-sm " type="button" tabindex="-1"  style="font-size: 1rem;" ng-show="loadButtonText = !null">{{loadButtonText}} &nbsp</button>
+                                <button class="btn btn-info  btn-sm " type="button" tabindex="-1"  style="font-size: 1rem;" ng-show="loadButtonText == !null">{{loadButtonText}} &nbsp</button>
                                 <ul class="uib-dropdown-menu dropdown-menu">
                                     <li ng-repeat="feedsource in feedsources | orderBy: ['title','url']">
-                                        <a ng=click="feedSrc=feedsource.url;loadFeed($event);" style="font-size:1rem;">{{feedsource.title}}</a>
+                                        <a ng-click="feedSrc=feedsource.url;loadFeed($event);" style="font-size:1rem;">{{feedsource.title}}</a>
                                     </li>
                                     <!--<li><a ng-click="feedSrc='http://patentlyo.com/feed';loadFeed($event);" style="font-size: 1rem;">Patently-O</a></li>
                                     <li><a ng-click="feedSrc='http://ptolitigationcenter.com/feed/';loadFeed($event);" style="font-size: 1rem;">PTO Litigation Center</a></li>
