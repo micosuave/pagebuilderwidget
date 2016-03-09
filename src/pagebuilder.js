@@ -218,6 +218,18 @@ angular.module('adf.widget.pagebuilder').controller('PageBuilderConfigCtrl', ['$
         };
 
         $scope.loadButonText = null;
+        $scope.tabularize = function(feed){
+            var data = feed.content;
+            var dates = [];
+            angular.forEach(data, function(datum, key){
+                
+               var props = datum.split('<br/>');
+               var prop = props.split('-');
+               var da = new Object.create(null, [prop[1], prop[0]]);
+               dates.push(da);
+            });
+            $scope.dates = dates;
+        };
     }]).controller('VideoCtrl',
     ["$sce", "$scope", "$window", "config", function($sce, $scope, $window, config) {
         var video = this;
