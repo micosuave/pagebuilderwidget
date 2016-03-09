@@ -40,9 +40,9 @@
                 <dir-pagination-controls pagination-id="rsspagination" template-url="/llp_core/bower_components/angular-utils-pagination/dirPagination.tpl.html" class=""></dir-pagination-controls>
                 <ul class="list-group" style="text-align: left;">
 
-                    <li dir-paginate="feed in feeds | filter:filterText | itemsPerPage: 15" pagination-id="rsspagination" class="list-group-item" uib-popover-template="feed.content | trustAsHtml" popover-trigger="mouseenter" >
-                        <h6><a ng-href="{{feed.link}}" ng-click="window.open(this.href, '', 'resizable=yes,status=no,location=no,toolbar=no,menubar=no,fullscreen=no,scrollbars=yes,dependent=no,width=800,left=150,height=500,top=150'); return false;">{{feed.title | highlight: filterText}}</a></h6>
-                        <p class="text-left" style="line-height: 1;">{{feed.contentSnippet | highlight: filterText}}
+                    <li dir-paginate="feed in feeds | filter:filterText | itemsPerPage: 15" pagination-id="rsspagination" class="list-group-item"  >
+                        <h6><a ng-href="{{feed.link}}" onclick="window.open(this.href, '', 'resizable=yes,status=no,location=no,toolbar=no,menubar=no,fullscreen=no,scrollbars=yes,dependent=no,width=800,left=150,height=500,top=150');">{{feed.title}}</a></h6>
+                        <p class="text-left" style="line-height: 1;">{{feed.contentSnippet}}
                             <small class="pull-right small">{{feed.publishedDate | date}}</small>
                         </p>
                     </li>
