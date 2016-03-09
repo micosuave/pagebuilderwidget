@@ -1,33 +1,34 @@
- <uib-tabset type="tabs" justified class="panel panel-dark tabbable top-tabs" style="width:100%;height:auto;">
-        <uib-tab heading="US {{config.pnum | number:0}}">
-            <d3pendingtree patent="config.pnum" tree="tree"></d3pendingtree>
-        </uib-tab>
-         <uib-tab heading="{{tree.pub.slice(0,4) + '/' + tree.pub.slice(4,tree.pub.length)}}">
-            <d3pendingtree patent="tree.pub" tree="altree"></d3pendingtree>
-        </uib-tab>
-       
-        <uib-tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disable="tab.disabled">
-            {{tab.content}}
-        </uib-tab>
-        <uib-tab ng-repeat="tab in config.tabs" heading="{{tab.title}}" active="tab.active" disable="tab.disabled">
-            {{tab.content}}
-        </uib-tab>
-        <uib-tab heading="View">
-            <button class="alert btn-glass btn-primary img card-rounded row" style="position:relative;display:flex;display:-webkit-flex;align-items:center;align-content:center;justify-content:space-between;flex-direction:row;background-color:#35688F;padding:2px;box-shadow:inset 10px 2px 50px rgba(0,0,0,0.5);" ng-click="main.collapse()">
-        <div style="display:flex;justify-content:flex-end;flex-direction:column;align-content:flex-end;vertical-align:middle;align-items:flex-end;">
-        <h4 class="card-title ng-binding display-4" style="margin-bottom:0;color: #fff;">US {{phd.patent.number | number:0  }}</h4>
-        
-        <h5 class="card-subtitle  ng-binding" style="color:#ddd;"><span class="lead">USSN {{phd.application['Application Number']}}</span></h5>
-        </div>
-        <img src="/llp_core/img/GoldLion.svg" class="img lionlogofilter" style="width:75px;height: auto;">
-        
-        <div style="display:flex;flex-direction:column;align-items:flex-start;justify-content:space-around;">
-          <img src="/llp_core/img/GoldLogoLong.svg" class="img" style="height:45px;">
-  
-          <img src="/llp_core/img/GoldPhdLogoLong.svg" class="img" style="height:25px;padding-left:2px;">
-        </div>
-        
-        <!-- <div class="fa fa-download fa-5x pull-right"></div> -->
-    </button>Tab content hard-coded in view.
-        </uib-tab>
-      </uib-tabset>
+<uib-tabset type="tabs" justified class="panel panel-dark tabbable top-tabs" style="width:100%;height:auto;">
+    <uib-tab heading="US {{config.pnum | number:0}}">
+        <d3pendingtree patent="config.pnum" tree="tree" pattern="{{query}}"></d3pendingtree>
+    </uib-tab>
+    <uib-tab heading="{{tree.pub.slice(0,4) + '/' + tree.pub.slice(4,tree.pub.length)}}">
+        <d3pendingtree patent="tree.pub" tree="altree" pattern="{{query}}"></d3pendingtree>
+    </uib-tab>
+
+    <uib-tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disable="tab.disabled">
+        {{tab.content}}
+    </uib-tab>
+    <uib-tab ng-repeat="tab in config.tabs" heading="{{tab.title}}" active="tab.active" disable="tab.disabled">
+        {{tab.content}}
+    </uib-tab>
+    <uib-tab heading="View">
+        <button class="alert btn-glass btn-primary img card-rounded row" style="position:relative;display:flex;display:-webkit-flex;align-items:center;align-content:center;justify-content:space-between;flex-direction:row;background-color:#35688F;padding:2px;box-shadow:inset 10px 2px 50px rgba(0,0,0,0.5);"
+        ng-click="main.collapse()">
+            <div style="display:flex;justify-content:flex-end;flex-direction:column;align-content:flex-end;vertical-align:middle;align-items:flex-end;">
+                <h4 class="card-title ng-binding display-4" style="margin-bottom:0;color: #fff;">US {{phd.patent.number | number:0  }}</h4>
+
+                <h5 class="card-subtitle  ng-binding" style="color:#ddd;"><span class="lead">USSN {{phd.application['Application Number']}}</span></h5>
+            </div>
+            <img src="/llp_core/img/GoldLion.svg" class="img lionlogofilter" style="width:75px;height: auto;">
+
+            <div style="display:flex;flex-direction:column;align-items:flex-start;justify-content:space-around;">
+                <img src="/llp_core/img/GoldLogoLong.svg" class="img" style="height:45px;">
+
+                <img src="/llp_core/img/GoldPhdLogoLong.svg" class="img" style="height:25px;padding-left:2px;">
+            </div>
+
+            <!-- <div class="fa fa-download fa-5x pull-right"></div> -->
+        </button>Tab content hard-coded in view.
+    </uib-tab>
+</uib-tabset>
