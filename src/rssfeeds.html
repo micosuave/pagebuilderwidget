@@ -17,20 +17,13 @@
                                     <li ng-repeat="feedsource in feedsources | orderBy: ['title','url']">
                                         <a ng-click="loadFeed($event,feedsource);" style="font-size:1rem;">{{feedsource.title}}</a>
                                     </li>
-                                    <!--<li><a ng-click="feedSrc='http://patentlyo.com/feed';loadFeed($event);" style="font-size: 1rem;">Patently-O</a></li>
-                                    <li><a ng-click="feedSrc='http://ptolitigationcenter.com/feed/';loadFeed($event);" style="font-size: 1rem;">PTO Litigation Center</a></li>
-
-                                    <li><a ng-click="feedSrc='http://www.law360.com/ip/rss';loadFeed($event)" style="font-size: 1rem;">IP Law360</a></li>
-                                    <li><a ng-click="feedSrc='http://feeds.feedblitz.com/AMLaw';loadFeed($event)" style="font-size: 1rem;">AMLaw Daily</a></li>
-                                    <li><a ng-click="feedSrc='http://feeds.feedblitz.com/TAL';loadFeed($event)" style="font-size: 1rem;">AM Law</a></li>-->
+                                   
                                 </ul>
                             </div>
 
-                            <!--<input type="text" class="col-xs-6 pull-right" autocomplete="on" placeholder="Enter Feed URL" data-ng-model="feedSrc" />-->
                         </div>
                     </div>
                     <div class="row input-prepend" ng-show="feeds.length > 0">
-                        <!-- <span class="add-on pull-left"><i class="fa fa-search"></i></span> -->
                         <input class="pull-left" type="text" placeholder="Search" data-ng-model="filterText" />
 
                         <span class="label label-warning pull-right" ng-show="feeds.length > 0" style="border-radius: 0.5rem;margin-top: 0.5rem;">{{(feeds | filter:filterText).length}} Items</span>
