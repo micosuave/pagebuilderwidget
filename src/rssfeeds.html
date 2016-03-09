@@ -45,6 +45,7 @@
                         <p class="text-left" style="line-height: 1;">{{feed.contentSnippet}}
                             <small class="pull-right small">{{feed.publishedDate | date}}</small>
                         </p>
+                        <div ng-bind-html="feed.content | highlight: filterText | trustAsHTML" ng-show="filterText.length > 0"></div>
                     </li>
                 </ul>
             </div>

@@ -9,10 +9,10 @@ angular.module('adf.widget.pagebuilder', ['adf.provider','ngSanitize',
     .config(function(dashboardProvider) {
         dashboardProvider
             .widget('placeholder',{
-                title: '',
-                description: '',
+                title: '-',
+                description: '-',
                 template: '<div class="hide"/>',
-                frameless:true,
+                frameless:false,
                 styleClass: 'hide'   
             }).widget('lexfeed',{
                 title: 'LexFeed',
@@ -154,7 +154,7 @@ angular.module('adf.widget.pagebuilder').controller('PageBuilderConfigCtrl', ['$
         FeedyService.parseFeed($scope.feedSrc).then(function(res){
             $scope.loadButonText=angular.element(e.target).text();
             $scope.feeds=res.data.responseData.feed.entries;
-            
+            $scope.response = res;
         });
     };
    
