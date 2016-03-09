@@ -96,6 +96,23 @@ angular.module('adf.widget.pagebuilder', ['adf.provider', 'ngSanitize',
                         { title: "Default Tab 2", content: "Default tab content 2" }
                     ]
                 }
+            }).widget('d3claimtreemap', {
+                title: 'Patent Claim Dependency',
+                titleTemplateUrl: '{widgetsPath}/testwidget/src/title.html',
+               templateUrl: "{widgetsPath}/pagebuilder/src/patenttabwidget.html",
+                description: 'view dependency tree of any published patent claim set',
+                template: '<div class="dark-bg"><div class="card card-block"><h4 class="card-title">US {{config.patentnumber | number:0}} <input class="pull-right" type="text" model="config.query" /></h4><d3pendingtree class="{{config.query}}" tree="tree" patent="{{config.patentnumber}}" /></d3pendingtree><blockquote id="info" class="bs-callout bs-callout-NOA" ng-bind-html="tree.abstract | highlight: config.query | trustAsHTML"></blockquote></div></div>',
+                controller: ['$sce', 'config', '$scope', '$compile', function($sce, config, $scope, $compile) {
+                    $scope.configs = $compile($sce.trustAsHtml(config.content))($scope);
+                }],
+                styleClass: 'card card-block',
+                frameless: false,
+                reload: true,
+                edit: {
+                    template: '<form class="card"><label for="patentnumber">Enter embed code</label><input name="patentnumber" class="form-control" ng-model="config.patentnumber"></input></form>',
+                    immediate: true,
+                    reload: true
+                }
             });
     });
 angular.module('adf.widget.pagebuilder').controller('PageBuilderConfigCtrl', ['$scope', 'config', '$window', '$document', '$compile', '$parse', '$http', 'dashboard', '$sce', '$templateCache',
