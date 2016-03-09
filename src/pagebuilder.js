@@ -157,7 +157,7 @@ angular.module('adf.widget.pagebuilder').controller('PageBuilderConfigCtrl', ['$
     ];
 })
 .controller('FeedyCtrl', ['$scope','FeedyService','config','Feedz', function ($scope,FeedyService,config,Feedz) {
-    $scope.feedsources = Feedz();
+    $scope.feedsources = Feedz;
     $scope.loadFeed=function(e){
         FeedyService.parseFeed($scope.feedSrc).then(function(res){
             $scope.loadButonText=angular.element(e.target).text();
