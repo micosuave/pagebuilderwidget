@@ -7,23 +7,26 @@
                 <form class="card-header" style="">
                     <div class="row">
                         <div class="input-prepend">
-                            <div class="btn-group col-xs-6 pull-right" uib-dropdown uib-keyboard-nav dropdown-append-to-body>
+                            <div class="btn-group col-xs-6" uib-dropdown uib-keyboard-nav dropdown-append-to-body>
 
-                                <button uib-dropdown-toggle class="btn btn-info dropdown-toggle pull-right btn-sm"  tabindex="-1" style="border-top-right-radius: 1rem;border-bottom-right-radius:1rem;font-size: 1rem;">
+                                <button uib-dropdown-toggle class="btn btn-info  btn-sm"  tabindex="-1" style="font-size: 1rem;">
                                     <span class="caret">&nbsp</span>
                                 </button>
-                                <button class="btn btn-info pull-right btn-sm " type="button" tabindex="-1"  style="font-size: 1rem;border-bottom-left-radius: 1rem;border-top-left-radius: 1rem;" ng-show="loadButtonText = !null">{{loadButonText}} &nbsp</button>
+                                <button class="btn btn-info  btn-sm " type="button" tabindex="-1"  style="font-size: 1rem;" ng-show="loadButtonText = !null">{{loadButtonText}} &nbsp</button>
                                 <ul class="uib-dropdown-menu dropdown-menu">
-                                    <li><a ng-click="feedSrc='http://patentlyo.com/feed';loadFeed($event);" style="font-size: 1rem;">Patently-O</a></li>
+                                    <li ng-repeat="feedsource in feedsources | orderBy: ['title','url']">
+                                        <a ng=click="feedSrc=feedsource.url;loadFeed($event);" style="font-size:1rem;">{{feedsource.title}}</a>
+                                    </li>
+                                    <!--<li><a ng-click="feedSrc='http://patentlyo.com/feed';loadFeed($event);" style="font-size: 1rem;">Patently-O</a></li>
                                     <li><a ng-click="feedSrc='http://ptolitigationcenter.com/feed/';loadFeed($event);" style="font-size: 1rem;">PTO Litigation Center</a></li>
 
                                     <li><a ng-click="feedSrc='http://www.law360.com/ip/rss';loadFeed($event)" style="font-size: 1rem;">IP Law360</a></li>
                                     <li><a ng-click="feedSrc='http://feeds.feedblitz.com/AMLaw';loadFeed($event)" style="font-size: 1rem;">AMLaw Daily</a></li>
-                                    <li><a ng-click="feedSrc='http://feeds.feedblitz.com/TAL';loadFeed($event)" style="font-size: 1rem;">AM Law</a></li>
+                                    <li><a ng-click="feedSrc='http://feeds.feedblitz.com/TAL';loadFeed($event)" style="font-size: 1rem;">AM Law</a></li>-->
                                 </ul>
                             </div>
 
-                            <input type="text" class="col-xs-6 pull-right" autocomplete="on" placeholder="Enter Feed URL" data-ng-model="feedSrc" />
+                            <!--<input type="text" class="col-xs-6 pull-right" autocomplete="on" placeholder="Enter Feed URL" data-ng-model="feedSrc" />-->
                         </div>
                     </div>
                     <div class="row input-prepend" ng-show="feeds.length > 0">

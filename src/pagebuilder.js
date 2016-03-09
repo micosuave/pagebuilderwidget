@@ -148,8 +148,16 @@ angular.module('adf.widget.pagebuilder').controller('PageBuilderConfigCtrl', ['$
         }
     };
 }])
-.controller('FeedyCtrl', ['$scope','FeedyService','config', function ($scope,FeedyService,config) {
-    
+.factory('Feedz', function(){ 
+    return [
+       {title:'Federal Circuit IP Blog',url:'http://federalcircuitipblog.com/feed/'},
+       {title:'PTO Litigation Center Report',url:'http://ptolitigationcenter.com/feed/'},
+       {title:'Big Molecule Watch Blog',url:'http://feeds.feedburner.com/GoodwinProcter-BigMoleculeWatchBlog'},
+       {title:'IT Law Today',url:'http://feeds.lexblog.com/ItLawToday'}
+    ];
+})
+.controller('FeedyCtrl', ['$scope','FeedyService','config','Feedz', function ($scope,FeedyService,config,Feedz) {
+    $scope.feedsources = Feedz();
     $scope.loadFeed=function(e){
         FeedyService.parseFeed($scope.feedSrc).then(function(res){
             $scope.loadButonText=angular.element(e.target).text();
