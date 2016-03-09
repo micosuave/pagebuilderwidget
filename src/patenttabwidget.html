@@ -1,9 +1,9 @@
 <uib-tabset type="tabs" justified class="panel panel-dark tabbable top-tabs" style="width:100%;height:auto;">
     <uib-tab heading="US {{config.patentnumber | number:0}}">
-        <d3pendingtree patent="config.patentnumber" tree="tree" pattern="{{query}}"></d3pendingtree>
+        <d3pendingtree patent="{{$parent.$parent.config.patentnumber}}" tree="tree" pattern="{{query}}"></d3pendingtree>
     </uib-tab>
     <uib-tab heading="{{tree.pub.slice(0,4) + '/' + tree.pub.slice(4,tree.pub.length)}}">
-        <d3pendingtree patent="tree.pub" tree="altree" pattern="{{query}}"></d3pendingtree>
+        <d3pendingtree patent="{{tree.pub}}" tree="altree" pattern="{{query}}"></d3pendingtree>
     </uib-tab>
 
     <uib-tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disable="tab.disabled">
