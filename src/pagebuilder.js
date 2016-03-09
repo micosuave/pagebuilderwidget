@@ -62,7 +62,39 @@ angular.module('adf.widget.pagebuilder', ['adf.provider','ngSanitize',
                     immediate: true
                 }
 
-            });
+            }).widget("message", {
+      title: "Message",
+      description: "Displays a message",
+      templateUrl: "widgets/message/view.html",
+      controller: "MessageWidgetController",
+      frameless: false,
+      config: {
+          message: "This is the default message."
+      },
+      edit: {
+          templateUrl: "widgets/message/edit.html"
+      }
+    })
+    .widget("tabs", {
+      title: "Tabs",
+      description: "Demonstrates UI Bootstrap tabs in a widget",
+      templateUrl: "widgets/tabs/view.html",
+      controller: "TabsWidgetController",
+      resolve: {
+        tabs: [function () {
+          return [
+            { title: "Resolved", content: "Tab content from widget resolve" }
+          ];
+        }]
+      },
+      frameless: false,
+      config: {
+          tabs: [
+            { title:"Default Tab 1", content:"Default tab content 1" },
+            { title:"Default Tab 2", content:"Default tab content 2" }
+        ]
+      }
+    });
     });
 angular.module('adf.widget.pagebuilder').controller('PageBuilderConfigCtrl', ['$scope', 'config', '$window', '$document', '$compile', '$parse', '$http', 'dashboard', '$sce','$templateCache',
         function($scope, config, $window, $document, $compile, $parse, $http, dashboard, $sce, $templateCache) {

@@ -56,3 +56,29 @@
     </div>
 </div>
 </div>-->
+ <script type="text/ng-template" id="widgets/tabs/view.html">
+      <uib-tabset>
+        <uib-tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disable="tab.disabled">
+            {{tab.content}}
+        </uib-tab>
+        <uib-tab ng-repeat="tab in config.tabs" heading="{{tab.title}}" active="tab.active" disable="tab.disabled">
+            {{tab.content}}
+        </uib-tab>
+        <uib-tab heading="View">
+            Tab content hard-coded in view.
+        </uib-tab>
+      </uib-tabset>
+    </script>
+    
+    <!-- Message Widget Templates -->
+    <script type="text/ng-template" id="widgets/message/view.html">
+      {{config.message}}
+    </script>
+    <script type="text/ng-template" id="widgets/message/edit.html">
+      <form role="form">
+        <div class="form-group">
+            <label for="editMessage">Message</label>
+            <input type="text" id="editMessage" class="form-control" ng-model="config.message"/>
+        </div>
+      </form>
+    </script>
