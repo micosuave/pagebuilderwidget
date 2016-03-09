@@ -177,7 +177,7 @@ angular.module('adf.widget.pagebuilder').controller('PageBuilderConfigCtrl', ['$
             }, {
                 url: '/llp_core/modules/templates/memotemplate2page.html',
                 label: 'Memo'
-            }]
+            }];
     }
 ])
     .controller('PageBuilderCtrl', ['$scope', 'config', '$window', '$document', '$compile', '$parse', '$http', 'dashboard', '$sce', 'Collection',
@@ -227,10 +227,10 @@ angular.module('adf.widget.pagebuilder').controller('PageBuilderConfigCtrl', ['$
                var line = datum.split('<br/>');
                props.push(line);
                angular.forEach(props, function(prop, key){
-                   var prop = props.split('-');
-                   var key = prop[0];
-                   var value = prop[1];
-               var da = new Object.create(null, [key, value]);
+                   var pop = props.split('-');
+                   var kley = pop[0];
+                   var value = pop[1];
+               var da = new Object.create(null, [kley, value]);
                dates.push(da);
                });
                
