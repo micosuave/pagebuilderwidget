@@ -219,11 +219,16 @@ angular.module('adf.widget.pagebuilder').controller('PageBuilderConfigCtrl', ['$
 
         $scope.loadButonText = null;
         $scope.tabularize = function(feed){
-            var data = Papa.parse(feed.content,{delimiter:'–', skipEmptyLines: true});
+            var dates = [];
+            angular.forEach(feed.content, function(content, key){
+                var itemdata =  Papa.parse(feed.content,{delimiter:'–', skipEmptyLines: true});
+            dates.push(itemdata);
+        });
+            
             // var dates = [];
             // var children = $(data).children();
            
-            $scope.dates = data;
+            $scope.dates = dates;
         };
     }]).controller('VideoCtrl',
     ["$sce", "$scope", "$window", "config", function($sce, $scope, $window, config) {

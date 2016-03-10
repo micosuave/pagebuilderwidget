@@ -3,53 +3,76 @@
         <h4 class="" style="margin-top:0rem;">{{config.title || 'LexFeed'}}</h4></div>
     <div class="panel-body" style="width: 100%; height: 55.5rem; overflow: scroll;">
         <div class="container" ng-controller="FeedyCtrl">-->
-            <!--<div class="row">-->
-                <form class="card-header" style="width:100%;margin:0;">
-                    <div class="row">
-                        <div class="input-prepend">
-                            <div class="btn-group " uib-dropdown uib-keyboard-nav dropdown-append-to-body>
+<!--<div class="row">-->
+<form class="card-header" style="width:100%;margin:0;">
+    <div class="row">
+        <div class="input-prepend">
+            <div class="btn-group " uib-dropdown uib-keyboard-nav dropdown-append-to-body>
 
-                                <button uib-dropdown-toggle class="btn btn-default  btn-sm"  tabindex="-1" style="font-size: 1rem;">
-                                    <span class="caret">&nbsp</span>
-                                </button>
-                                <button class="btn btn-glass btn-info  btn-sm " type="button" tabindex="-1"  style="font-size: 1rem;" ng-show="loadButtonText == !null">{{loadButtonText}} &nbsp</button>
-                                <ul class="uib-dropdown-menu dropdown-menu">
-                                    <li ng-repeat="feedsource in feedsources | orderBy: ['title','url']">
-                                        <a ng-click="loadFeed($event,feedsource);" style="font-size:1rem;">{{feedsource.title}}</a>
-                                    </li>
-                                   
-                                </ul>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="row input-prepend" ng-show="feeds.length > 0">
-                        <input class="pull-left" type="text" placeholder="Search" data-ng-model="filterText" />
-
-                        <span class="label label-warning pull-right" ng-show="feeds.length > 0" style="border-radius: 0.5rem;margin-top: 0.5rem;">{{(feeds | filter:filterText).length}} Items</span>
-                    </div>
-
-
-                </form>
-            <!--</div>-->
-            <div class="card" style="width:100%;height:100%;overflow:scroll;">
-                <dir-pagination-controls pagination-id="rsspagination" template-url="/llp_core/bower_components/angular-utils-pagination/dirPagination.tpl.html" class=""></dir-pagination-controls>
-                <ul class="list-group" style="text-align: left;">
-
-                    <li dir-paginate="feed in feeds | filter:filterText | itemsPerPage: 15" pagination-id="rsspagination" class="list-group-item"  >
-
-                        <!--<h6><a ng-href="{{feed.link}}" onclick="window.open(this.href, '', 'resizable=yes,status=no,location=no,toolbar=no,menubar=no,fullscreen=no,scrollbars=yes,dependent=no,width=800,left=150,height=500,top=150');">{{feed.title}}</a></h6>-->
-                        <h6><a ng-click="tabularize(feed)" ng-bind-html="feed.title | highlight: filterText | trustAsHTML"></a></h6>
-                        <p class="text-left" style="line-height: 1;">{{feed.contentSnippet}}
-                            <small class="pull-right small">{{feed.publishedDate | date}}</small>
-                        </p>
-                        <pre class="code" ng-bind="dates | json: 4" ng-show="dates"></pre>
-                        <div ng-bind-html="feed.content|patentlink | highlight: filterText | trustAsHTML" ng-show="filterText.length > 0"></div>
+                <button uib-dropdown-toggle class="btn btn-default  btn-sm" tabindex="-1" style="font-size: 1rem;">
+                    <span class="caret">&nbsp</span>
+                </button>
+                <button class="btn btn-glass btn-info  btn-sm " type="button" tabindex="-1" style="font-size: 1rem;" ng-show="loadButtonText == !null">{{loadButtonText}} &nbsp</button>
+                <ul class="uib-dropdown-menu dropdown-menu">
+                    <li ng-repeat="feedsource in feedsources | orderBy: ['title','url']">
+                        <a ng-click="loadFeed($event,feedsource);" style="font-size:1rem;">{{feedsource.title}}</a>
                     </li>
+
                 </ul>
             </div>
-        <!--</div>
+
+        </div>
+    </div>
+    <div class="row input-prepend" ng-show="feeds.length > 0">
+        <input class="pull-left" type="text" placeholder="Search" data-ng-model="filterText" />
+
+        <span class="label label-warning pull-right" ng-show="feeds.length > 0" style="border-radius: 0.5rem;margin-top: 0.5rem;">{{(feeds | filter:filterText).length}} Items</span>
+    </div>
+
+
+</form>
+<!--</div>-->
+<div class="card" style="width:100%;height:100%;overflow:scroll;">
+    <dir-pagination-controls pagination-id="rsspagination" template-url="/llp_core/bower_components/angular-utils-pagination/dirPagination.tpl.html"
+    class=""></dir-pagination-controls>
+    <ul class="list-group" style="text-align: left;">
+
+        <li dir-paginate="feed in feeds | filter:filterText | itemsPerPage: 15" pagination-id="rsspagination" class="list-group-item">
+
+            <!--<h6><a ng-href="{{feed.link}}" onclick="window.open(this.href, '', 'resizable=yes,status=no,location=no,toolbar=no,menubar=no,fullscreen=no,scrollbars=yes,dependent=no,width=800,left=150,height=500,top=150');">{{feed.title}}</a></h6>-->
+            <h6><a ng-click="tabularize(feed)" ng-bind-html="feed.title | highlight: filterText | trustAsHTML"></a></h6>
+            <p class="text-left" style="line-height: 1;">{{feed.contentSnippet}}
+                <small class="pull-right small">{{feed.publishedDate | date:medium}}</small>
+            </p>
+            <pre class="code" ng-bind="dates | json: 4" ng-show="dates"></pre>
+            <table>
+                <thead></thead>
+                <tbody>
+                    <tr ng-repeat="feed in feeds">
+                        <td>{{feed.publishedDate | date:medium}}</td>
+                        <td>
+                            <table>
+                                <thead></thead>
+                                <tbody>
+                                    <tr ng-repeat="datum in dates">
+                                        <td><pre ng-bind="datum|json:2"></pre></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td>Data source: {{feed.author}}</td>
+                    </tr>
+                </tfoot>
+            </table>
+            <div ng-bind-html="feed.content|patentlink | highlight: filterText | trustAsHTML" ng-show="filterText.length > 0"></div>
+        </li>
+    </ul>
+</div>
+<!--</div>
     </div>
 </div>
 </div>-->
- 
