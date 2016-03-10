@@ -110,7 +110,7 @@ angular.module('adf.widget.pagebuilder', ['adf.provider', 'ngSanitize',
                 frameless: false,
                 reload: true,
                 edit: {
-                    template: '<form class="card"><label for="patentnumber">Enter numbers</label><input name="patentnumber" class="form-control" ng-model="config.patentnumbers[0]" ng-change="config.patentnumbers.unshift(this)"></input></form>',
+                    template: '<form class="card"><label for="patentnumber">Enter numbers</label><input name="patentnumber" class="form-control" ng-model="config.patentnumbers" ng-list /></form>',
                     immediate: true,
                     reload: true
                 }
