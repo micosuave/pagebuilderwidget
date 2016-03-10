@@ -222,7 +222,15 @@ angular.module('adf.widget.pagebuilder').controller('PageBuilderConfigCtrl', ['$
         $scope.tabularize = function(feed){
             var data = angular.element(feed.content);
             var dates = [];
-            angular.forEach(data, function(datum, key){
+            var children = $(data).children();
+            var bset = [];
+           
+            var h4ipr = children.indexOf($('h4').text('New IPR Petitions'));
+            var h4cbm = children.indexOf($('h4').text('New CBM Review Petitions'));
+            var reexamreq = children.indexOf($('h4').text('Newly-Posted Reexam Requests'));
+
+            var items = $(children).filter('p');
+            angular.forEach(items, function(datum, key){
                 var props = [];
                try{
                var line = datum.split('<br/>');
