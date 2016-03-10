@@ -109,7 +109,7 @@ angular.module('adf.widget.pagebuilder', ['adf.provider', 'ngSanitize',
                 frameless: false,
                 reload: true,
                 edit: {
-                    template: '<form class="card"><label for="patentnumber">Enter embed code</label><input name="patentnumber" class="form-control" ng-model="config.patentnumber"></input></form>',
+                    template: '<form class="card"><label for="patentnumber">Enter numbers</label><input name="patentnumber" class="form-control" ng-model="config.patentnumbers[0]" ng-change="config.patentnumbers.unshift(this)"></input></form>',
                     immediate: true,
                     reload: true
                 }
@@ -226,9 +226,9 @@ angular.module('adf.widget.pagebuilder').controller('PageBuilderConfigCtrl', ['$
                var line = datum.split('<br/>');
                props.push(line);
                angular.forEach(props, function(prop, key){
-                   var pop = prop.split('-');
-                   var kley = pop[0];
-                   var value = pop[1];
+                   var pop = prop.indexOf('-');
+                   var kley = prop.slice(0,pop);
+                   var value = prop.slice(pop, prop.length);
                var da = new Object.create(null, [kley, value]);
                dates.push(da);
                });
