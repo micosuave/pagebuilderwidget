@@ -223,6 +223,7 @@ angular.module('adf.widget.pagebuilder').controller('PageBuilderConfigCtrl', ['$
             var dates = [];
             angular.forEach(data, function(datum, key){
                 var props = [];
+               try{
                var line = datum.split('<br/>');
                props.push(line);
                angular.forEach(props, function(prop, key){
@@ -234,7 +235,8 @@ angular.module('adf.widget.pagebuilder').controller('PageBuilderConfigCtrl', ['$
                debugger;
                dates.push(da);
                });
-               
+               }catch(ex){console.log(ex);}
+               finally{}
             });
             debugger;
             $scope.dates = dates;
