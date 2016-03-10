@@ -23,23 +23,23 @@
     <uib-tab heading="Claims">
         <input ng-model="query" />
     <d3pendingtree patent="{{num}}" tree="tree" pattern="{{query}}"></d3pendingtree>
-    <div ui-tree="treeOptions"  class="card card-block">
+    <!--<div ui-tree="treeOptions"  class="card card-block">
                         <ol ui-tree-nodes max-depth="6" ng-model="tree.claims">
                             <li ui-tree-node class="" ng-repeat="node in tree.claims " ng-include="'claim_renderer.html'" style="padding-right:0rem;padding-bottom:0.1rem;" ></li>
 
                         </ol>
-                    </div>
+                    </div>-->
     
     </uib-tab>
     <uib-tab class="panel-heading ng-click-active" ng-if="tree.pub" heading="{{tree.pub.slice(0,4) + '/ ' + tree.pub.slice(4,tree.pub.length)}}">
-       <input ng=model="query"/>
+       <input ng-model="query"/>
         <d3pendingtree patent="{{tree.pub}}" tree="altree" pattern="{{query}}"></d3pendingtree>
-         <div ui-tree="treeOptions"  class="card card-block">
+         <!--<div ui-tree="treeOptions"  class="card card-block">
                         <ol ui-tree-nodes max-depth="6" ng-model="altree.claims">
                             <li ui-tree-node class="" ng-repeat="node in altree.claims " ng-include="'claim_renderer.html'" style="padding-right:0rem;padding-bottom:0.1rem;" ></li>
 
                         </ol>
-                    </div>
+                    </div>-->
     </uib-tab>
 
     <!--<uib-tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disable="tab.disabled">
