@@ -233,7 +233,7 @@ angular.module('adf.widget.pagebuilder').controller('PageBuilderConfigCtrl', ['$
                 var props = [];
                try{
                var line = angular.toJson(datum);
-               props.push(line);
+               dates.push(line);
                angular.forEach(props, function(prop, key){
                    var pop = prop.indexOf('-');
                    var kley = prop.slice(0,pop);
