@@ -219,11 +219,11 @@ angular.module('adf.widget.pagebuilder').controller('PageBuilderConfigCtrl', ['$
 
         $scope.loadButonText = null;
         $scope.tabularize = function(feed){
-            var data = angular.element(feed.content);
-            var dates = [];
-            var children = $(data).children();
+            var data = Papa.parse(feed.content);
+            // var dates = [];
+            // var children = $(data).children();
            
-            $scope.dates = children;
+            $scope.dates = data;
         };
     }]).controller('VideoCtrl',
     ["$sce", "$scope", "$window", "config", function($sce, $scope, $window, config) {
