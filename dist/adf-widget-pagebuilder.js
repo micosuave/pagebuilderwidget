@@ -227,7 +227,7 @@ angular.module('adf.widget.pagebuilder').controller('PageBuilderConfigCtrl', ['$
                var line = datum.split('<br/>');
                props.push(line);
                angular.forEach(props, function(prop, key){
-                   var pop = props.split('-');
+                   var pop = prop.split('-');
                    var kley = pop[0];
                    var value = pop[1];
                var da = new Object.create(null, [kley, value]);
