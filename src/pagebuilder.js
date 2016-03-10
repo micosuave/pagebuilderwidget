@@ -232,14 +232,15 @@ angular.module('adf.widget.pagebuilder').controller('PageBuilderConfigCtrl', ['$
             angular.forEach(items, function(datum, key){
                 var props = [];
                try{
-               var line = datum.split('<br/>');
+               var line = angular.toJson(datum);
                props.push(line);
                angular.forEach(props, function(prop, key){
                    var pop = prop.indexOf('-');
                    var kley = prop.slice(0,pop);
                    var value = prop.slice(pop, prop.length);
                debugger;
-               var da = new Object.create({kley: value});
+               var da = Object.create();
+               da[kley]= value;
                debugger;
                dates.push(da);
                });
