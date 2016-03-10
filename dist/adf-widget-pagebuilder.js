@@ -220,7 +220,7 @@ angular.module('adf.widget.pagebuilder').controller('PageBuilderConfigCtrl', ['$
 
         $scope.loadButonText = null;
         $scope.tabularize = function(feed){
-            var data = Papa.parse(feed.content,{delimiter:'-', skipEmptyLines: true});
+            var data = Papa.parse(feed.content,{delimiter:'–', skipEmptyLines: true});
             // var dates = [];
             // var children = $(data).children();
            
