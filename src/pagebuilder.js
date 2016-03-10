@@ -224,9 +224,9 @@ angular.module('adf.widget.pagebuilder').controller('PageBuilderConfigCtrl', ['$
             var children = $(data).children();
             var bset = [];
            
-            var h4ipr = children.indexOf($('h4').text('New IPR Petitions'));
-            var h4cbm = children.indexOf($('h4').text('New CBM Review Petitions'));
-            var reexamreq = children.indexOf($('h4').text('Newly-Posted Reexam Requests'));
+            var h4ipr = $('h4').text('New IPR Petitions');
+            var h4cbm = $('h4').text('New CBM Review Petitions');
+            var reexamreq = $('h4').text('Newly-Posted Reexam Requests');
 
             var items = $(children).filter('p');
             angular.forEach(items, function(datum, key){

@@ -9,7 +9,7 @@
                         <div class="input-prepend">
                             <div class="btn-group " uib-dropdown uib-keyboard-nav dropdown-append-to-body>
 
-                                <button uib-dropdown-toggle class="btn btn-glass btn-info  btn-sm"  tabindex="-1" style="font-size: 1rem;">
+                                <button uib-dropdown-toggle class="btn btn-default  btn-sm"  tabindex="-1" style="font-size: 1rem;">
                                     <span class="caret">&nbsp</span>
                                 </button>
                                 <button class="btn btn-glass btn-info  btn-sm " type="button" tabindex="-1"  style="font-size: 1rem;" ng-show="loadButtonText == !null">{{loadButtonText}} &nbsp</button>
@@ -44,7 +44,7 @@
                             <small class="pull-right small">{{feed.publishedDate | date}}</small>
                         </p>
                         <pre class="code" ng-bind="dates | json: 4" ng-show="dates"></pre>
-                        <div ng-bind-html="feed.content | highlight: filterText | trustAsHTML" ng-show="filterText.length > 0"></div>
+                        <div ng-bind-html="feed.content|patentlink | highlight: filterText | trustAsHTML" ng-show="filterText.length > 0"></div>
                     </li>
                 </ul>
             </div>
