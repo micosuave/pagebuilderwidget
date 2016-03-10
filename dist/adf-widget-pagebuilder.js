@@ -223,33 +223,8 @@ angular.module('adf.widget.pagebuilder').controller('PageBuilderConfigCtrl', ['$
             var data = angular.element(feed.content);
             var dates = [];
             var children = $(data).children();
-            var bset = [];
            
-            var h4ipr = $('h4').text('New IPR Petitions');
-            var h4cbm = $('h4').text('New CBM Review Petitions');
-            var reexamreq = $('h4').text('Newly-Posted Reexam Requests');
-
-            var items = $(children).filter('p');
-            angular.forEach(items, function(datum, key){
-                var props = [];
-               try{
-               var line = angular.toJson(datum);
-               dates.push(line);
-               angular.forEach(props, function(prop, key){
-                   var pop = prop.indexOf('-');
-                   var kley = prop.slice(0,pop);
-                   var value = prop.slice(pop, prop.length);
-               debugger;
-               var da = Object.create();
-               da[kley]= value;
-               debugger;
-               dates.push(da);
-               });
-               }catch(ex){console.log(ex);}
-               finally{}
-            });
-            debugger;
-            $scope.dates = dates;
+            $scope.dates = children;
         };
     }]).controller('VideoCtrl',
     ["$sce", "$scope", "$window", "config", function($sce, $scope, $window, config) {
