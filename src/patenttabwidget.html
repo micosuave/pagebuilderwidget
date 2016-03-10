@@ -7,10 +7,10 @@
         <ng-annotate-text class="bs-callout bs-callout-NOA" text="tree.abstract"></ng-annotate-text>
           </uib-tab>
           <uib-tab heading="Figures">
-        <uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
+        <uib-carousel active="active" interval="5000" no-wrap="false">
             <uib-slide ng-repeat="drawing in tree.drawings track by $index" index="$index">
-                <img ng-src="{{drawing}}" style="margin:auto;">
-                <div class="carousel-caption">
+                <img ng-src="{{drawing}}" style="margin:auto;width:100%;height:fit-content;">
+                <div class="carousel-caption btn-dark">
                     <h4>Figure {{$index}}</h4>
                     <p>{{drawing}}</p>
                 </div>

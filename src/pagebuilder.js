@@ -229,11 +229,14 @@ angular.module('adf.widget.pagebuilder').controller('PageBuilderConfigCtrl', ['$
                    var pop = prop.indexOf('-');
                    var kley = prop.slice(0,pop);
                    var value = prop.slice(pop, prop.length);
-               var da = new Object.create(null, [kley, value]);
+               debugger;
+               var da = new Object.create({kley: value});
+               debugger;
                dates.push(da);
                });
                
             });
+            debugger;
             $scope.dates = dates;
         };
     }]).controller('VideoCtrl',
