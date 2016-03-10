@@ -219,7 +219,7 @@ angular.module('adf.widget.pagebuilder').controller('PageBuilderConfigCtrl', ['$
 
         $scope.loadButonText = null;
         $scope.tabularize = function(feed){
-            var data = feed.content;
+            var data = angular.element(feed.content);
             var dates = [];
             angular.forEach(data, function(datum, key){
                 var props = [];
