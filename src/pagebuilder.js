@@ -13,7 +13,15 @@ angular.module('adf.widget.pagebuilder', ['adf.provider', 'ngSanitize',
                 description: '-',
                 template: '<uib-alert type="warning" close><span class="fa fa-5x fa-ra"></span></uib-alert>',
                 frameless: false,
-                styleClass: 'alert alert=warning'
+                reload: true,
+                styleClass: 'alert alert-warning',
+                resolve: {
+                    tabs: [function() {
+                        return [
+                            { title: "Resolved", content: "Tab content from widget resolve" }
+                        ];
+                    }]
+                }
             }).widget('lexfeed', {
                 title: 'LexFeed',
                 description: 'RSS Feed Reader',
