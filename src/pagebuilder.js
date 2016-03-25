@@ -70,19 +70,24 @@ angular.module('adf.widget.pagebuilder', ['adf.provider', 'ngSanitize',
                     immediate: true
                 }
 
-            }).widget("message", {
-                title: "Message",
-                description: "Displays a message",
-                templateUrl: "widgets/message/view.html",
-                //controller: "MessageWidgetController",
-                styleClass: 'alert alert-info',
+            }).widget("metadata", {
+                title: "Metadata",
+                description: "Configure metadata",
+                templateUrl: "../src/templates/dashboard-edit.html",
+                controller: "MessageWidgetController",
+                styleClass: 'panel panel-default',
                 frameless: false,
-                config: {
-                    message: "This is the default message."
+                resolve: {
+                    config: ["config","$scope", function(config, $scope) {
+                        return config.id = $scope.$parent.adfModel.$id;
+                    }] 
                 },
-                edit: {
-                    templateUrl: "widgets/message/edit.html"
-                }
+                 edit: {
+                    templateUrl: '{widgetsPath}/testwidget/src/edit.html',
+                    modalSize: 'lg',
+                    controller: 'CKEditorCtrl',
+                    reload: false
+                },
             })
             .widget("tabs", {
                 title: "Tabs",
