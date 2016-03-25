@@ -74,7 +74,7 @@ angular.module('adf.widget.pagebuilder', ['adf.provider', 'ngSanitize',
             }).widget("metadata", {
                 title: "Metadata",
                 description: "Configure metadata",
-                templateUrl: "../src/templates/dashboard-edit.html",
+                templateUrl: "{widgetsPath}/src/templates/dashboard-edit.html",
                 controller: "MessageWidgetController",
                 styleClass: 'panel panel-default',
                 frameless: false,
