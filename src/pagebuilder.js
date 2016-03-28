@@ -73,7 +73,7 @@ angular.module('adf.widget.pagebuilder', ['adf.provider', 'ngSanitize',
             }).widget("metadata", {
                 title: "Metadata",
                 description: "Configure metadata",
-                templateUrl: "{widgetsPath}/src/templates/dashboard-edit.html",
+                templateUrl: "../src/templates/dashboard-edit.html",
                 controller: "MessageWidgetController",
                 styleClass: 'panel panel-default',
                 frameless: false,
@@ -87,7 +87,7 @@ angular.module('adf.widget.pagebuilder', ['adf.provider', 'ngSanitize',
                     modalSize: 'lg',
                     controller: 'CKEditorCtrl',
                     reload: false
-                },
+                }
             })
             .widget("tabs", {
                 title: "Tabs",
@@ -95,19 +95,11 @@ angular.module('adf.widget.pagebuilder', ['adf.provider', 'ngSanitize',
                 templateUrl: "{widgetsPath}/pagebuilder/src/tabwidget.html",
                 //controller: "TabsWidgetController",
                 styleClass: 'panel-default',
-                resolve: {
-                    tabs: [function() {
-                        return [
-                            { title: "Resolved", content: "Tab content from widget resolve" }
-                        ];
-                    }]
-                },
-                frameless: false,
-                config: {
-                    tabs: [
-                        { title: "Default Tab 1", content: "Default tab content 1" },
-                        { title: "Default Tab 2", content: "Default tab content 2" }
-                    ]
+                edit: {
+                    templateUrl: '{widgetsPath}/testwidget/src/edit.html',
+                    modalSize: 'lg',
+                    controller: 'CKEditorCtrl',
+                    reload: false
                 }
             }).widget('d3claimtreemap', {
                 title: 'Patent Claim Dependency',
@@ -128,7 +120,16 @@ angular.module('adf.widget.pagebuilder', ['adf.provider', 'ngSanitize',
                 }
             });
     });
-angular.module('adf.widget.pagebuilder').controller('PageBuilderConfigCtrl', ['$scope', 'config', '$window', '$document', '$compile', '$parse', '$http', 'dashboard', '$sce', '$templateCache',
+angular.module('adf.widget.pagebuilder')
+.controller('ContentTreeCtrl', ['Collections','$scope',function(Collections, $scope){
+    var cs = Collections();
+    $scope.tree = {
+        roarlist: cs
+    };
+}])
+
+
+.controller('PageBuilderConfigCtrl', ['$scope', 'config', '$window', '$document', '$compile', '$parse', '$http', 'dashboard', '$sce', '$templateCache',
     function($scope, config, $window, $document, $compile, $parse, $http, dashboard, $sce, $templateCache) {
         var page = this;
         page.config = config;
