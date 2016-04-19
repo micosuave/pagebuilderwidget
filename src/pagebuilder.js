@@ -8,21 +8,7 @@ angular.module('adf.widget.pagebuilder', ['adf.provider', 'ngSanitize',
 ])
     .config(function(dashboardProvider) {
         dashboardProvider
-            .widget('placeholder', {
-                title: '-',
-                description: '-',
-                template: '<uib-alert type="warning" close><span class="fa fa-5x fa-ra"></span></uib-alert>',
-                frameless: false,
-                reload: true,
-                styleClass: 'alert alert-warning',
-                resolve: {
-                    tabs: [function() {
-                        return [
-                            { title: "Resolved", content: "Tab content from widget resolve" }
-                        ];
-                    }]
-                }
-            }).widget('lexfeed', {
+            .widget('lexfeed', {
                 title: 'LexFeed',
                 description: 'RSS Feed Reader',
                 templateUrl: '{widgetsPath}/pagebuilder/src/rssfeeds.html',
@@ -70,55 +56,56 @@ angular.module('adf.widget.pagebuilder', ['adf.provider', 'ngSanitize',
                     immediate: true
                 }
 
-            }).widget("metadata", {
-                title: "Metadata",
-                description: "Configure metadata",
-                templateUrl: "../src/templates/dashboard-edit.html",
-                controller: "MessageWidgetController",
-                styleClass: 'panel panel-default',
-                frameless: false,
-                resolve: {
-                    config: ["config","$scope", function(config, $scope) {
-                        return config.id = $scope.$parent.adfModel.$id;
-                    }] 
-                },
-                 edit: {
-                    templateUrl: '{widgetsPath}/testwidget/src/edit.html',
-                    modalSize: 'lg',
-                    controller: 'CKEditorCtrl',
-                    reload: false
-                }
-            })
-            .widget("tabs", {
-                title: "Tabs",
-                description: "Demonstrates UI Bootstrap tabs in a widget",
-                templateUrl: "{widgetsPath}/pagebuilder/src/tabwidget.html",
-                //controller: "TabsWidgetController",
-                styleClass: 'panel-default',
-                edit: {
-                    templateUrl: '{widgetsPath}/testwidget/src/edit.html',
-                    modalSize: 'lg',
-                    controller: 'CKEditorCtrl',
-                    reload: false
-                }
-            }).widget('d3claimtreemap', {
-                title: 'Patent Claim Dependency',
-                titleTemplateUrl: '{widgetsPath}/testwidget/src/title.html',
-               templateUrl: "{widgetsPath}/pagebuilder/src/patenttabwidget.html",
-                description: 'view dependency tree of any published patent claim set',
-             
-                controller: ['$sce', 'config', '$scope', '$compile', function($sce, config, $scope, $compile) {
-                    $scope.configs = $compile($sce.trustAsHtml(config.content))($scope);
-                }],
-                styleClass: 'card card-block',
-                frameless: false,
-                reload: true,
-                edit: {
-                    template: '<form class="card"><label for="patentnumber">Enter numbers</label><input name="patentnumber" class="form-control" ng-model="config.patentnumbers" ng-list /></form>',
-                    immediate: true,
-                    reload: true
-                }
-            });
+             });
+            //.widget("metadata", {
+            //     title: "Metadata",
+            //     description: "Configure metadata",
+            //     templateUrl: "../src/templates/dashboard-edit.html",
+            //     controller: "MessageWidgetController",
+            //     styleClass: 'panel panel-default',
+            //     frameless: false,
+            //     resolve: {
+            //         config: ["config","$scope", function(config, $scope) {
+            //             return config.id = $scope.$parent.adfModel.$id;
+            //         }]
+            //     },
+            //      edit: {
+            //         templateUrl: '{widgetsPath}/testwidget/src/edit.html',
+            //         modalSize: 'lg',
+            //         controller: 'CKEditorCtrl',
+            //         reload: false
+            //     }
+            // })
+            // .widget("tabs", {
+            //     title: "Tabs",
+            //     description: "Demonstrates UI Bootstrap tabs in a widget",
+            //     templateUrl: "{widgetsPath}/pagebuilder/src/tabwidget.html",
+            //     //controller: "TabsWidgetController",
+            //     styleClass: 'panel-default',
+            //     edit: {
+            //         templateUrl: '{widgetsPath}/testwidget/src/edit.html',
+            //         modalSize: 'lg',
+            //         controller: 'CKEditorCtrl',
+            //         reload: false
+            //     }
+            // }).widget('d3claimtreemap', {
+            //     title: 'Patent Claim Dependency',
+            //     titleTemplateUrl: '{widgetsPath}/testwidget/src/title.html',
+            //    templateUrl: "{widgetsPath}/pagebuilder/src/patenttabwidget.html",
+            //     description: 'view dependency tree of any published patent claim set',
+
+            //     controller: ['$sce', 'config', '$scope', '$compile', function($sce, config, $scope, $compile) {
+            //         $scope.configs = $compile($sce.trustAsHtml(config.content))($scope);
+            //     }],
+            //     styleClass: 'card card-block',
+            //     frameless: false,
+            //     reload: true,
+            //     edit: {
+            //         template: '<form class="card"><label for="patentnumber">Enter numbers</label><input name="patentnumber" class="form-control" ng-model="config.patentnumbers" ng-list /></form>',
+            //         immediate: true,
+            //         reload: true
+            //     }
+            // });
     });
 angular.module('adf.widget.pagebuilder')
 .controller('ContentTreeCtrl', ['Collections','$scope',function(Collections, $scope){
@@ -238,10 +225,10 @@ angular.module('adf.widget.pagebuilder')
                 var itemdata =  Papa.parse(feed.content,{delimiter:'–', skipEmptyLines: true});
             dates.push(itemdata);
         });
-            
+
             // var dates = [];
             // var children = $(data).children();
-           
+
             $scope.dates = dates;
         };
     }]).controller('VideoCtrl',
