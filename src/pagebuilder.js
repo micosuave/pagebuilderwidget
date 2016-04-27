@@ -14,7 +14,7 @@ angular.module('adf.widget.pagebuilder', ['adf.provider', 'ngSanitize',
                 templateUrl: '{widgetsPath}/pagebuilder/src/rssfeeds.html',
                 controller: 'FeedyCtrl',
                 frameless: false,
-                reload: true,
+                reload: false,
                 styleClass: 'panel-info',
                 edit: {
                     template: '<input ng-model="config.src" placeholder="feed source" type="url" />'
@@ -45,7 +45,7 @@ angular.module('adf.widget.pagebuilder', ['adf.provider', 'ngSanitize',
                 controller: 'PageBuilderCtrl',
                 controllerAs: 'page',
                 styleClass: 'panel-default',
-                reload: true,
+                reload: false,
                 //titleTemplateUrl: '{widgetsPath}/getphd/src/titleTemplate.html',
                 edit: {
                     templateUrl: '{widgetsPath}/pagebuilder/src/edit.html',
