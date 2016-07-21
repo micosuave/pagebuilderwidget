@@ -1,4 +1,4 @@
-<div class="videogular-container img img-responsive" style="padding: 0;margin:0;display:flex;width:100%;height:auto;border:5px ridge #ffa;">
+<!--<div class="videogular-container img img-responsive" style="padding: 0;margin:0;display:flex;width:100%;height:auto;border:5px ridge #ffa;">
           <videogular vg-theme="'/lexlab-starter/node_modules/videogular-themes-default/videogular.css'" vg-complete="" vg-auto-play="" vg-start-time="">
             <vg-media vg-src="video.config.sources" vg-tracks="video.config.tracks"></vg-media>
             <vg-controls>
@@ -15,11 +15,12 @@
               </vg-volume>
               <vg-fullscreen-button></vg-fullscreen-button>
             </vg-controls>
-            
-            
+
+
             <vg-overlay-play></vg-overlay-play>
             <vg-poster vg-url="config.poster"></vg-poster>
           </videogular>
-</div>
-            
-  
+</div>-->
+<video-bg video-id="config.videoId" ratio="{{config.ratio}}" loop="{{config.loop}}" mute="{{config.mute}}" start="{{config.start}}" content-z-index="{{config.contentz}}" allow-click-events="{{config.clickevents}}">
+</video-bg>
+

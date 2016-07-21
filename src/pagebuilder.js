@@ -235,6 +235,8 @@ angular.module('adf.widget.pagebuilder')
     ["$sce", "$scope", "$window", "config", function($sce, $scope, $window, config) {
         var video = this;
         $scope.config = config;
+
+
         video.config = {
             sources: [],
             tracks: []
