@@ -57,7 +57,7 @@ angular.module('adf.widget.pagebuilder', ['adf.provider', 'ngSanitize',
                     immediate: true
                 }
 
-             });
+             })
             //.widget("metadata", {
             //     title: "Metadata",
             //     description: "Configure metadata",
@@ -89,24 +89,25 @@ angular.module('adf.widget.pagebuilder', ['adf.provider', 'ngSanitize',
             //         controller: 'CKEditorCtrl',
             //         reload: false
             //     }
-            // }).widget('d3claimtreemap', {
-            //     title: 'Patent Claim Dependency',
-            //     titleTemplateUrl: '{widgetsPath}/testwidget/src/title.html',
-            //    templateUrl: "{widgetsPath}/pagebuilder/src/patenttabwidget.html",
-            //     description: 'view dependency tree of any published patent claim set',
+            //})
+            .widget('d3claimtreemap', {
+                title: 'Patent Claim Dependency',
+                titleTemplateUrl: '{widgetsPath}/testwidget/src/title.html',
+               templateUrl: "{widgetsPath}/pagebuilder/src/patenttabwidget.html",
+                description: 'view dependency tree of any published patent claim set',
 
-            //     controller: ['$sce', 'config', '$scope', '$compile', function($sce, config, $scope, $compile) {
-            //         $scope.configs = $compile($sce.trustAsHtml(config.content))($scope);
-            //     }],
-            //     styleClass: 'card card-block',
-            //     frameless: false,
-            //     reload: true,
-            //     edit: {
-            //         template: '<form class="card"><label for="patentnumber">Enter numbers</label><input name="patentnumber" class="form-control" ng-model="config.patentnumbers" ng-list /></form>',
-            //         immediate: true,
-            //         reload: true
-            //     }
-            // });
+                controller: ['$sce', 'config', '$scope', '$compile', function($sce, config, $scope, $compile) {
+                    $scope.configs = $compile($sce.trustAsHtml(config.content))($scope);
+                }],
+                styleClass: 'card card-block',
+                frameless: false,
+                reload: true,
+                edit: {
+                    template: '<form class="card"><label for="patentnumber">Enter numbers</label><input name="patentnumber" class="form-control" ng-model="config.patentnumbers" ng-list /></form>',
+                    immediate: true,
+                    reload: true
+                }
+            });
     }]);
 angular.module('adf.widget.pagebuilder')
 .controller('ContentTreeCtrl', ['Collections','$scope',function(Collections, $scope){
