@@ -253,8 +253,8 @@ angular.module('adf.widget.pagebuilder')
         // video.config = {
         //     sources: [
         //         //{src: $sce.trustAsResourceUrl("https://cdn.filepicker.io/api/file/bbQUjDxLTUumApIUStAg"), type: "video/webm"}
-        //          {src: $sce.trustAsResourceUrl("https://lexlab.io/files/public/charm.webm"), type: "video/webm"}
-        //         //{src: $sce.trustAsResourceUrl("https://lexlab.io/files/public/lexspacevideo1.mov"), type: "video/mp4"}
+        //          {src: $sce.trustAsResourceUrl("https://lexspace.net/files/public/charm.webm"), type: "video/webm"}
+        //         //{src: $sce.trustAsResourceUrl("https://lexspace.net/files/public/lexspacevideo1.mov"), type: "video/mp4"}
         //         //{src: $sce.trustAsResourceUrl("http://static.videogular.com/assets/videos/videogular.webm"), type: "video/webm"},
         //         //{src: $sce.trustAsResourceUrl("http://static.videogular.com/assets/videos/videogular.ogg"), type: "video/ogg"}
         //     ],
@@ -269,7 +269,7 @@ angular.module('adf.widget.pagebuilder')
         //     ],
         //     theme: "/lexlab-starter/node_modules/videogular-themes-default/videogular.css",
         //     plugins: {
-        //         poster: "https://lexlab.io/llp_core/img/lexlab.svg"
+        //         poster: "https://lexspace.net/llp_core/img/lexlab.svg"
         //     }
         //};
 
