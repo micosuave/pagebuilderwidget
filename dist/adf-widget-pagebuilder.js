@@ -198,7 +198,7 @@ angular.module('adf.widget.pagebuilder')
                 page.data = $sce.trustAsHtml(page.config.data);
             }
         }
-    ]).factory('FeedyService', ['$http', function($http) {
+    ]).factory('FeedyService', ['$http','$sce', function($http, $sce) {
         return {
             parseFeed: function(url) {
                 return $http.jsonp('//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=50&callback=JSON_CALLBACK&q=' + encodeURIComponent(url));
@@ -213,13 +213,22 @@ angular.module('adf.widget.pagebuilder')
             { title: 'IT Law Today', url: 'http://feeds.lexblog.com/ItLawToday' }
         ];
     })
-    .controller('FeedyCtrl', ['$scope', 'FeedyService', 'config', 'Feedz', function($scope, FeedyService, config, Feedz) {
+    .factory('ffeeds', ["$firebaseArray", "$rootScope", function($firebaseArray, $rootScope){
+        return function(){
+            var ref = firebase.database().ref().child('users').child($rootScope.authData.uid).child('RSS');
+            return $firebaseArray(ref);
+        }
+    }])
+    .controller('FeedyCtrl', ['$scope', 'FeedyService', 'config', 'Feedz','ffeeds', function($scope, FeedyService, config, Feedz, ffeeds) {
         $scope.feedsources = Feedz;
+        $scope.user_feeds = ffeeds();
+
         $scope.loadFeed = function(e, source) {
             FeedyService.parseFeed(source.url).then(function(res) {
                 $scope.loadButonText = source.title;
-                $scope.feeds = res.data.responseData.feed.entries;
                 $scope.response = res;
+                $scope.feeds = res.data ? res.data.responseData ? res.data.responseData.feed.entries : [] : []
+ 
             });
         };
 
@@ -230,11 +239,14 @@ angular.module('adf.widget.pagebuilder')
                 var itemdata =  Papa.parse(feed.content,{delimiter:'–', skipEmptyLines: true});
             dates.push(itemdata);
         });
+        $scope.addFeed = function(title, url){
+            $scope.user_feeds.$add({"title": title, "url": url});
+        }
 
             // var dates = [];
             // var children = $(data).children();
 
-            $scope.dates = dates;
+            // $scope.dates = dates;
         };
     }]).controller('VideoCtrl',
     ["$sce", "$scope", "$window", "config", function($sce, $scope, $window, config) {
